@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">4Mation</string>
     <string name="lets_go">Let\'s Go</string>
+    <string name="note_vibes">Note Vibes</string>
+    <string name="slogan">N O T E   Y O U R S E L F</string>
+    <string name="todo">To Do</string>
+    <string name="list">List</string>
+    <string name="sticky_icon">Sticky Notes</string>
+    <string name="lock">Password Lock</string>
 </resources>
