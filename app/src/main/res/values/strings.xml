@@ -39,4 +39,37 @@
     <string name="enter_set_key">Set Key</string>
     <string name="enter_question">Enter Security Question</string>
     <string name="enter_question_answer">Answer</string>
+    <string name="btn_start">GET STARTED</string>
+
+    <string name="et_tit">Enter Title Here</string>
+    <string name="et_stickynote"> Sticky Note</string>
+    <string name="et_ttl">Enter Tittle Here</string>
+    <string name="et_body">Enter Text Here</string>
+    <string name="et_sty"> Add Colour</string>
+    <string name="et_fontsize">Font Size</string>
+    <string name="et_word">Characters</string>
+    <string name="et_words">Words</string>
+    <string name="et_wordc">Words</string>
+    <string name="et_sent">Sentences</string>
+
+    <string name="et_search">Search Sticky</string>
+    <string name="et_searchbar">Search Sticky Here</string>
+    <string name="et_ttledit">Hello World</string>
+    <string name="et_bodyedit">A "Hello World" program generrally is a computer program that displays the message "Hello World". Such a program is very simple in most programmin g languages,and is often used to illustrate the basic syntax of a programming language.It bis often the first program written by people.</string>
+    <string name="tv_emptyitm">No Item, Add New</string>
+    <string name="tv_selectphoto">Select a Photo</string>
+    <string name="et__addurl">Add URL</string>
+    <string name="et_inputurl">Type url</string>
+    <string name="et_cancel">Cancel</string>
+    <string name="et_confirm">Confirm</string>
+    <string name="tv_char">characters</string>
+    <string name="tv_word">words</string>
+    <string name="tv_sen">sentences</string>
+    <string name="tv_ccount">0</string>
+    <string name="tv_wcount">0</string>
+    <string name="tv_scount">0</string>
+    <string name="et_tittle">Enter Tittle</string>
+    <string name="et_body1">Type Here</string>
+    <string name="et_tl">Enter tittle</string>
+    <string name="et_bd">Type Here</string>
 </resources>

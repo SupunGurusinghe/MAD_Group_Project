@@ -35,4 +35,12 @@
     <color name="colorbox2">#ED9121</color>
     <color name="colorbox3">#01796F</color>
     <color name="colorbox4">#D21F3C</color>
+
+
+
+    <color name="yellow">#ffbb33</color>
+    <color name="lightBlue">#bfebe3</color>
+    <color name="red">#b00020</color>
+    <color name="search">#333333</color>
+    <color name="hintCol">#7b7b7b</color>
 </resources>
