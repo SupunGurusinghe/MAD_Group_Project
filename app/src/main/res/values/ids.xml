@@ -7,4 +7,6 @@
     <item name="key" type="id">key</item>
     <item name="viewPasswordIndicator" type="id">viewPasswordIndicator</item>
     <item name="imageSave" type="id">imageSave</item>
+    <item name="imageDeleteNote" type="id">imageDeleteNote</item>
+    <item name="okButton" type="id">okButton</item>
 </resources>
