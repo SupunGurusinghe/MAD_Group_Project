@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
-    tools:context=".MainActivity">
+    tools:context=".activities.ListView">
 
     <TextView
         android:id="@+id/textMyNotes"
@@ -40,7 +40,7 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_list_search"/>
+            app:srcCompat="@drawable/ic_list_search"/>
 
 
         <EditText
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_23sdp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_list_add_outline"
+            app:srcCompat="@drawable/ic_list_add_outline"
             app:tint="@color/colorIcons"/>
 
         <ImageView
@@ -98,7 +98,7 @@
             android:layout_height="@dimen/_23sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_list_image"
+            app:srcCompat="@drawable/ic_list_image"
             app:tint="@color/colorIcons"/>
 
         <ImageView
@@ -107,7 +107,7 @@
             android:layout_height="@dimen/_23sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_list_web_link"
+            app:srcCompat="@drawable/ic_list_web_link"
             app:tint="@color/colorIcons"/>
 
     </LinearLayout>
@@ -120,7 +120,7 @@
         android:background="@drawable/background_list_add_button"
         android:contentDescription="@string/app_name"
         android:padding="@dimen/_5sdp"
-        android:src="@drawable/ic_list_add"
+        app:srcCompat="@drawable/ic_list_add"
         app:tint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/layoutQuickActions"
         app:layout_constraintEnd_toEndOf="parent"
