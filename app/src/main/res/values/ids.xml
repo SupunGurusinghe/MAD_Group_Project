@@ -6,4 +6,5 @@
     <item name="inputPassword" type="id">inputPassword</item>
     <item name="key" type="id">key</item>
     <item name="viewPasswordIndicator" type="id">viewPasswordIndicator</item>
+    <item name="imageSave" type="id">imageSave</item>
 </resources>
