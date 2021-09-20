@@ -72,4 +72,6 @@
     <string name="et_body1">Type Here</string>
     <string name="et_tl">Enter tittle</string>
     <string name="et_bd">Type Here</string>
+    <string name="tv_urladding">Add URL</string>
+    <string name="tv_4toadding">Add Photo</string>
 </resources>
