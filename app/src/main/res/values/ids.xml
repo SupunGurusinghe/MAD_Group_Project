@@ -9,4 +9,7 @@
     <item name="imageSave" type="id"/>
     <item name="imageDeleteNote" type="id"/>
     <item name="okButton" type="id"/>
+    <item name="ResetKeyTitle" type="id" />
+    <item name="addNewPassword" type="id" />
+    <item name="setKeyButton" type="id" />
 </resources>
