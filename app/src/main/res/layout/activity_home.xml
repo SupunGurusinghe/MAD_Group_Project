@@ -90,7 +90,7 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/ic_note"
+                        app:srcCompat="@drawable/ic_note"
                         app:tint="@color/colorWhite" />
 
                 </LinearLayout>
@@ -132,7 +132,7 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/ic_list"
+                        app:srcCompat="@drawable/ic_list"
                         app:tint="@color/colorWhite" />
 
                 </LinearLayout>
@@ -178,7 +178,7 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/ic_sticky"
+                        app:srcCompat="@drawable/ic_sticky"
                         app:tint="@color/colorWhite" />
 
                 </LinearLayout>
@@ -225,7 +225,7 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/ic_lock"
+                        app:srcCompat="@drawable/ic_lock"
                         app:tint="@color/colorWhite" />
 
                 </LinearLayout>
