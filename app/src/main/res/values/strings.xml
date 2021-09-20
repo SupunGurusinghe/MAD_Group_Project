@@ -7,4 +7,6 @@
     <string name="list">List</string>
     <string name="sticky_icon">Sticky Notes</string>
     <string name="lock">Password Lock</string>
+    <string name="password_lock">Password Lock</string>
+    <string name="search_password">Search Password</string>
 </resources>
