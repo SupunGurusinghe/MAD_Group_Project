@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="imageBack" type="id">imageBack</item>
+    <item name="InputPasswordTitle" type="id">InputPasswordTitle</item>
+    <item name="textDateTime" type="id">textDateTime</item>
+    <item name="inputPassword" type="id">inputPassword</item>
+    <item name="key" type="id">key</item>
+    <item name="viewPasswordIndicator" type="id">viewPasswordIndicator</item>
 </resources>
