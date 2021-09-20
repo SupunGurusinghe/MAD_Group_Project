@@ -23,4 +23,11 @@
     <string name="done">Done</string>
     <string name="key_title">Key Title</string>
     <string name="set_key">Set Key</string>
+
+
+    <string name="note_title">List Title</string>
+    <string name="note_subtitle">List Subtitle</string>
+    <string name="my_lists">my lists</string>
+    <string name="search_list">search list Here</string>
+
 </resources>
