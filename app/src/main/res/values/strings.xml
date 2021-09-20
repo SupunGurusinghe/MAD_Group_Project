@@ -13,7 +13,7 @@
     <string name="password">Password</string>
     <string name="key">Key</string>
     <string name="notes">Notes</string>
-    <string name="type_description_here">Type Description Here...</string>
+    <string name="type_description_here">Type Description Here</string>
     <string name="encrypt">Encrypt</string>
     <string name="pick_color">Pick Color</string>
     <string name="add_url">Add URL</string>

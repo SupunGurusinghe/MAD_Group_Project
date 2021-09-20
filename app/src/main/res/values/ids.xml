@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="imageBack" type="id">imageBack</item>
-    <item name="InputPasswordTitle" type="id">InputPasswordTitle</item>
-    <item name="textDateTime" type="id">textDateTime</item>
-    <item name="inputPassword" type="id">inputPassword</item>
-    <item name="key" type="id">key</item>
-    <item name="viewPasswordIndicator" type="id">viewPasswordIndicator</item>
-    <item name="imageSave" type="id">imageSave</item>
-    <item name="imageDeleteNote" type="id">imageDeleteNote</item>
-    <item name="okButton" type="id">okButton</item>
+    <item name="imageBack" type="id"/>
+    <item name="InputPasswordTitle" type="id"/>
+    <item name="textDateTime" type="id"/>
+    <item name="inputPassword" type="id"/>
+    <item name="key" type="id"/>
+    <item name="viewPasswordIndicator" type="id"/>
+    <item name="imageSave" type="id"/>
+    <item name="imageDeleteNote" type="id"/>
+    <item name="okButton" type="id"/>
 </resources>
