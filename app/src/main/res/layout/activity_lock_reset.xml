@@ -33,7 +33,7 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_12sdp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_back"
+                app:srcCompat="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/colorIcons" />
