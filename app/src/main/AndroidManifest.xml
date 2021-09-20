@@ -13,6 +13,8 @@
             android:name=".activities.stkTypeMsg"
             android:exported="true"
             android:label="@string/et_stickynote" />
+
+
         <activity
             android:name=".activities.stkAddItems"
             android:exported="true"
