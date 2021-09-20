@@ -35,4 +35,5 @@
     <color name="colorbox2">#ED9121</color>
     <color name="colorbox3">#01796F</color>
     <color name="colorbox4">#D21F3C</color>
+    <color name="colorStatusBar">#DC143C</color>
 </resources>
