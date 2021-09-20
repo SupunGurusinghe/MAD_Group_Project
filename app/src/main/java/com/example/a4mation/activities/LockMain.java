@@ -1,4 +1,4 @@
-package com.example.a4mation;
+package com.example.a4mation.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.a4mation.R;
 
 public class LockMain extends AppCompatActivity {
 

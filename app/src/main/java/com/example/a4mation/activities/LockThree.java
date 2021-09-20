@@ -1,4 +1,4 @@
-package com.example.a4mation;
+package com.example.a4mation.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,32 +17,33 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a4mation.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class LockOne extends AppCompatActivity {
+public class LockThree extends AppCompatActivity {
 
-    //Default Key
-    public static String defaultKey = "abc";
-    String temp = "";
-
-    //declarations
     private ImageView imageBack;
     private ImageView imageNote;
     private Button encryptButton;
     private TextView textDateTime;
     private TextView textWebUrl;
     private LinearLayout layoutWebUrl;
+    private TextView title, password, url, description;
+
     private LinearLayout layoutForgotPassword;
-    private EditText titleEdit;
-    private EditText passwordEdit;
-    private EditText descriptionEdit;
-    private Button mButton;
-    private TextView inputURL;
-    private EditText keyEdit;
+
+    public static final String TITLE2 = "Title";
+    public static final String PASSWORD2 = "Password";
+    public static final String DESCRIPTION2 = "Description";
+    public static final String URL2 = "WWW.GOOGLE.COM";
+
+    private String passwordTitle, passwordPassword, passwordUrl, passwordDescription;
     private String selectedImagePath;
-    private String title, password, description, Url, key;
+
+    private AlertDialog dialogDeleteNote;
     private AlertDialog dialogAddUrl;
     private AlertDialog dialogIncorrectPassword;
     private AlertDialog dialogChangePassword;
@@ -51,16 +52,39 @@ public class LockOne extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lock_one);
+        setContentView(R.layout.activity_lock_three);
 
 
-        imageBack = findViewById(R.id.imageBack);
-        encryptButton = findViewById(R.id.encryptButton);
-        textDateTime = findViewById(R.id.textDateTime);
-        textWebUrl = findViewById(R.id.textWebUrl);
-        layoutWebUrl = findViewById(R.id.layoutWebUrl);
+        title = findViewById(R.id.InputPasswordTitle);
+        password = findViewById(R.id.inputPassword);
+        url = findViewById(R.id.textWebUrl);
+        description = findViewById(R.id.inputDescription);
 
-        //come back
+        Intent i = getIntent();
+        passwordTitle = i.getStringExtra(TITLE2);
+        passwordPassword = i.getStringExtra(PASSWORD2);
+        passwordUrl = i.getStringExtra(URL2);
+        passwordDescription = i.getStringExtra(DESCRIPTION2);
+
+        title.setText(passwordTitle);
+        password.setText(passwordPassword);
+        url.setText(passwordUrl);
+        description.setText(passwordDescription);
+
+
+
+        //delete note dialog box popup
+        ImageView imageDeleteNote = findViewById(R.id.imageDeleteNote);
+        imageDeleteNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDeleteNoteDialog();
+            }
+        });
+
+
+
+        ImageView imageBack = findViewById(R.id.imageBack);
         imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,38 +92,39 @@ public class LockOne extends AppCompatActivity {
             }
         });
 
+        Button okButton = findViewById(R.id.okButton);
+        EditText key = findViewById(R.id.key);
+        okButton.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+                String tempKey = key.getText().toString().trim();
+                if(tempKey.equals(LockOne.defaultKey)){
+                    startActivity(
+                            new Intent(LockThree.this, LockMain.class)
+                    );
+                }else{
+                    showPasswordIncorrectDialog();
+                }
+            }
+        });
 
+        TextView textDateTime = findViewById(R.id.textDateTime);
 
-        //update current date and time
         textDateTime.setText(
                 new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
                         .format(new Date())
 
         );
 
-
-
-
-        //get inputs
-        mButton = (Button) findViewById(R.id.encryptButton);
-        titleEdit = (EditText) findViewById(R.id.InputPasswordTitle);
-        passwordEdit = (EditText)findViewById(R.id.inputPassword);
-        descriptionEdit = (EditText) findViewById(R.id.inputDescription);
-        keyEdit = (EditText) findViewById(R.id.key);
-        inputURL = (TextView) findViewById(R.id.textWebUrl);
-
-        mButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        sendData();
-                    }
-                }
-        );
-
-
-
+        //change password
+        layoutForgotPassword = findViewById(R.id.layoutForgotPassword);
+        layoutForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showChangePasswordDialog();
+            }
+        });
 
         // add url dialog layout popup
         LinearLayout layoutAddUrl = findViewById(R.id.layoutAddUrl);
@@ -111,8 +136,6 @@ public class LockOne extends AppCompatActivity {
         });
 
 
-
-
         findViewById(R.id.imageRemoveWebUrl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,9 +143,6 @@ public class LockOne extends AppCompatActivity {
                 layoutWebUrl.setVisibility(View.GONE);
             }
         });
-
-
-
 
         findViewById(R.id.imageRemoveImage).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,24 +154,40 @@ public class LockOne extends AppCompatActivity {
 
             }
         });
-
-
-
-
-        //change password
-        layoutForgotPassword = findViewById(R.id.layoutForgotPassword);
-        layoutForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showChangePasswordDialog();
-            }
-        });
     }
 
 
+    private void showDeleteNoteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(LockThree.this);
+        View view = LayoutInflater.from(this).inflate(
+                R.layout.layout_delete_note,
+                (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer)
+        );
+        builder.setView(view);
+        dialogDeleteNote = builder.create();
+        if (dialogDeleteNote.getWindow() != null) {
+            dialogDeleteNote.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+
+
+
+        view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogDeleteNote.dismiss();
+            }
+        });
+        dialogDeleteNote.show();
+    }
+
+
+
+
+
+    //add url
     private void showAddUrlDialog() {
         if (dialogAddUrl == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(LockOne.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(LockThree.this);
             View view = LayoutInflater.from(this).inflate(
                     R.layout.layout_add_url,
                     (ViewGroup) findViewById(R.id.layoutAddUrlContainer)
@@ -169,9 +205,9 @@ public class LockOne extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (inputUrl.getText().toString().trim().isEmpty()) {
-                        Toast.makeText(LockOne.this, "Enter URL", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LockThree.this, "Enter URL", Toast.LENGTH_SHORT).show();
                     } else if (!Patterns.WEB_URL.matcher(inputUrl.getText().toString()).matches()) {
-                        Toast.makeText(LockOne.this, "Enter valid URL", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LockThree.this, "Enter valid URL", Toast.LENGTH_SHORT).show();
                     } else {
                         textWebUrl.setText(inputUrl.getText().toString());
                         layoutWebUrl.setVisibility(View.VISIBLE);
@@ -193,44 +229,8 @@ public class LockOne extends AppCompatActivity {
 
 
 
-
-    //send Data method
-    public void sendData(){
-        title = titleEdit.getText().toString().trim();
-        password = passwordEdit.getText().toString().trim();
-        Url = inputURL.getText().toString().trim();
-        description = descriptionEdit.getText().toString().trim();
-        key = keyEdit.getText().toString().trim();
-
-        if(key.equals(defaultKey)){
-
-            char[] pwd = password.toCharArray();
-
-            String temp = "";
-            for(char c: pwd) {
-                c += 5;
-                temp = temp + c;
-            }
-
-            Intent i = new Intent(LockOne.this, LockTwo.class);
-
-            i.putExtra(LockTwo.TITLE, title);
-            i.putExtra(LockTwo.PASSWORD, temp);
-            i.putExtra(LockTwo.URL, Url);
-            i.putExtra(LockTwo.DESCRIPTION, description);
-
-            startActivity(i);
-        }else{
-            showPasswordIncorrectDialog();
-        }
-
-
-    }
-
-
-    //password incorrect dialog
     private void showPasswordIncorrectDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(LockOne.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(LockThree.this);
         View view = LayoutInflater.from(this).inflate(
                 R.layout.layout_password_incorrect,
                 (ViewGroup) findViewById(R.id.layoutIncorrectPasswordContainer)
@@ -253,9 +253,10 @@ public class LockOne extends AppCompatActivity {
     }
 
 
+
     //password change dialog
     private void showChangePasswordDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(LockOne.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(LockThree.this);
         View view = LayoutInflater.from(this).inflate(
                 R.layout.layout_change_password,
                 (ViewGroup) findViewById(R.id.layoutChangePasswordContainer)
@@ -265,7 +266,6 @@ public class LockOne extends AppCompatActivity {
         if (dialogChangePassword.getWindow() != null) {
             dialogChangePassword.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-
 
 
         view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
