@@ -8,110 +8,22 @@
     tools:context=".activities.stkTypeMsg">
 
 
-    <TextView
-        android:id="@+id/tv_scount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/tv_scount"
-        android:textColor="@color/colorNoteSubtitleText"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.664"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sen"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tv_wcount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
-        android:gravity="center"
-        android:text="@string/tv_wcount"
-        android:textColor="@color/colorNoteSubtitleText"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_scount"
-        app:layout_constraintHorizontal_bias="0.981"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_word"
-        app:layout_constraintVertical_bias="0.021" />
-
-    <TextView
-        android:id="@+id/tv_sen"
-        android:layout_width="86dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:gravity="center"
-        android:text="@string/tv_sen"
-        android:textColor="@color/colorIcons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_word"
-        android:layout_width="86dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center|center_vertical"
-        android:text="@string/tv_word"
-        android:textColor="@color/colorIcons"
-        app:layout_constraintEnd_toStartOf="@+id/tv_sen"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_char"
-        android:layout_width="86dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:text="@string/tv_char"
-        android:textColor="@color/colorIcons"
-        app:layout_constraintEnd_toStartOf="@+id/tv_word"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_ccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/tv_ccount"
-        android:textColor="@color/colorNoteSubtitleText"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_wcount"
-        app:layout_constraintHorizontal_bias="0.347"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_char"
-        app:layout_constraintVertical_bias="0.0" />
-
     <ImageView
         android:id="@+id/img_ok"
-        android:layout_width="63dp"
-        android:layout_height="48dp"
-        app:srcCompat="@drawable/ic_ok"
+        android:layout_width="69dp"
+        android:layout_height="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_sen"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="0.003"
+        app:srcCompat="@drawable/ic_ok" />
 
     <EditText
         android:id="@+id/et_tl"
-        android:layout_width="380dp"
-        android:layout_height="48dp"
+        android:layout_width="434dp"
+        android:layout_height="63dp"
         android:layout_marginStart="@dimen/_100sdp"
         android:layout_marginLeft="@dimen/_100sdp"
         android:ems="10"
@@ -128,8 +40,8 @@
 
     <EditText
         android:id="@+id/et_bd"
-        android:layout_width="383dp"
-        android:layout_height="471dp"
+        android:layout_width="432dp"
+        android:layout_height="458dp"
         android:ems="10"
         android:gravity="top|left"
         android:hint="@string/et_bd"
@@ -144,8 +56,8 @@
 
     <LinearLayout
         android:id="@+id/select"
-        android:layout_width="397dp"
-        android:layout_height="193dp"
+        android:layout_width="433dp"
+        android:layout_height="244dp"
         android:background="@drawable/background_miscellaneous"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -153,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_bd"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
 
         <LinearLayout
@@ -226,26 +138,26 @@
                     android:contentDescription="@string/app_name"
                     android:padding="@dimen/_10sdp"
                     app:tint="@color/colorWhite" />
-            </FrameLayout>
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
-                <View
-                    android:id="@+id/viewCol4"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/background_note_color_4" />
+                    <View
+                        android:id="@+id/viewCol4"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/background_note_color_4" />
 
-                <ImageView
-                    android:id="@+id/imgCol4"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:contentDescription="@string/app_name"
-                    android:padding="@dimen/_10sdp"
-                    app:tint="@color/colorWhite" />
+                    <ImageView
+                        android:id="@+id/imgCol4"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/_10sdp"
+                        app:tint="@color/colorWhite" />
+                </FrameLayout>
             </FrameLayout>
 
             <FrameLayout
@@ -367,6 +279,88 @@
         </LinearLayout>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="365dp"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/et_tl"
+        app:layout_constraintEnd_toStartOf="@+id/img_ok"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307">
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="114dp"
+            android:layout_height="34dp"
+            android:text="@string/tv_1"
+            android:textColor="@color/colorIcons" />
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="28dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/tv_2"
+            android:textColor="@color/colorIcons" />
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="100dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="@string/tv_3"
+            android:textColor="@color/colorIcons" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="335dp"
+        android:layout_height="33dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/et_tl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/tv_chcount"
+            android:layout_width="63dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tv_chcount"
+            android:textColor="@color/colorTextSubtitle" />
+
+        <TextView
+            android:id="@+id/tv_wocount"
+            android:layout_width="87dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tv_wocount"
+            android:textColor="@color/colorTextHint" />
+
+        <TextView
+            android:id="@+id/tv_secount"
+            android:layout_width="83dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tv_secount"
+            android:textColor="@color/colorTextHint" />
+
+        <TextView
+            android:id="@+id/tv_zero"
+            android:layout_width="41dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:text="TextView" />
     </LinearLayout>
 
 
