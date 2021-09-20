@@ -1,14 +1,16 @@
-package com.example.a4mation;
+package com.example.a4mation.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class LockOne extends AppCompatActivity {
+import com.example.a4mation.R;
+
+public class stkAddItems extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lock_one);
+        setContentView(R.layout.activity_stk_add_items);
     }
 }
