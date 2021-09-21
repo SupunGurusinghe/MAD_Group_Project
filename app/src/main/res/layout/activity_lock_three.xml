@@ -33,7 +33,7 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_12sdp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_back"
+                app:srcCompat="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/colorIcons" />
@@ -47,7 +47,7 @@
                 android:background="@drawable/background_delete"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_4sdp"
-                android:src="@drawable/ic_delete"
+                app:srcCompat="@drawable/ic_delete"
                 app:tint="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="@id/imageBack"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +161,7 @@
                 android:background="@drawable/background_delete"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_4sdp"
-                android:src="@drawable/ic_delete"
+                app:srcCompat="@drawable/ic_delete"
                 app:tint="@color/colorWhite"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/imageNote"
@@ -194,7 +194,7 @@
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_delete"
+                    app:srcCompat="@drawable/ic_delete"
                     app:tint="@color/colorDelete"/>
 
 
@@ -283,7 +283,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
                     android:padding="@dimen/_10sdp"
-                    android:src="@drawable/ic_done"
+                    app:srcCompat="@drawable/ic_done"
                     app:tint="@color/colorWhite" />
             </FrameLayout>
 
@@ -400,7 +400,7 @@
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_web_link"
+                    app:srcCompat="@drawable/ic_web_link"
                     app:tint="@color/colorIcons" />
 
                 <TextView
@@ -431,7 +431,7 @@
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_change_key"
+                    app:srcCompat="@drawable/ic_change_key"
                     app:tint="@color/colorIcons" />
 
                 <TextView

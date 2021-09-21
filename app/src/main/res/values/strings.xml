@@ -74,13 +74,13 @@
     <string name="et_bd">Type Here</string>
     <string name="tv_urladding">Add URL</string>
     <string name="tv_4toadding">Add Photo</string>
-    <string name="tv_backhome">Easy Sticky Note</string>
-    <string name="searchstkinput">search sticky notes</string>
 
-    <string name="tv_1">characters</string>
-    <string name="tv_2">words</string>
-    <string name="tv_3">sentences</string>
-    <string name="tv_chcount">0</string>
-    <string name="tv_wocount">0</string>
-    <string name="tv_secount">0</string>
+
+    <string name="note_title">List Title</string>
+    <string name="note_subtitle">List Subtitle</string>
+    <string name="my_lists">my lists</string>
+    <string name="search_list">search list Here</string>
+    <string name="tv_backhome">Easy sticky Note</string>
+    <string name="searchstkinput">search sticky note here</string>
+
 </resources>
