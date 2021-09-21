@@ -27,13 +27,16 @@
             android:name=".activities.stkTypeMsg"
             android:exported="true"
             android:label="@string/et_stickynote"/>
+
         <activity
             android:name=".activities.stkAddItems"
             android:exported="true"
-            android:label="@string/et_stickynote" />
+            android:label="@string/et_stickynote"/>
+
         <activity
             android:name=".activities.stkWelcomePage"
-            android:exported="true" />
+            android:exported="true"/>
+
         <activity
             android:name=".activities.LockReset"
             android:exported="true" />
