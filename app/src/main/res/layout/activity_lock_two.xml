@@ -33,7 +33,7 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_12sdp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_back"
+                app:srcCompat="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/colorIcons" />
@@ -47,7 +47,7 @@
                 android:background="@drawable/password_done_button"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/_4sdp"
-                android:src="@drawable/ic_done"
+                app:srcCompat="@drawable/ic_done"
                 app:tint="@color/colorIcons"
                 app:layout_constraintBottom_toBottomOf="@id/imageBack"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -243,7 +243,7 @@
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_change_key"
+                app:srcCompat="@drawable/ic_change_key"
                 app:tint="@color/colorIcons" />
 
             <TextView
