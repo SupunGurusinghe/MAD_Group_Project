@@ -55,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_backhome"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.005">
 
         <ImageView
             android:layout_width="@dimen/_20sdp"
@@ -72,11 +72,11 @@
             android:layout_marginLeft="@dimen/_12sdp"
             android:background="@null"
             android:fontFamily="@font/ubuntu_regular"
+            android:hint="@string/searchstkinput"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:includeFontPadding="false"
             android:inputType="text"
-            android:hint="@string/searchstkinput"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorTextHint"
             android:textSize="@dimen/_13ssp" />
@@ -85,8 +85,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/passwordRecyclerView"
-        android:layout_width="427dp"
-        android:layout_height="646dp"
+        android:layout_width="421dp"
+        android:layout_height="623dp"
         android:clipToPadding="false"
         android:paddingStart="0dp"
         android:paddingLeft="0dp"
