@@ -7,6 +7,21 @@
     android:background="@color/colorPrimary"
     tools:context=".activities.stkDisplayEdit">
 
+ <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:animateLayoutChanges="true">
 
     <TextView
         android:id="@+id/tv_scount"
@@ -105,41 +120,55 @@
         app:layout_constraintStart_toStartOf="@+id/tv_char"
         app:layout_constraintTop_toBottomOf="@+id/tv_char" />
 
-    <EditText
-        android:id="@+id/et_tl"
-        android:layout_width="320dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="@string/et_tl"
-        android:fontFamily="@font/ubuntu_regular"
+            <EditText
+                android:id="@+id/et_tl"
+                android:layout_width="306dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="40dp"
+                android:ems="10"
+                android:fontFamily="@font/ubuntu_regular"
+                android:gravity="top"
+                android:hint="@string/et_tl"
 
-        android:inputType="textImeMultiLine"
-        android:textColorHint="@color/colorNoteSubtitleText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_word" />
+                android:inputType="text|textMultiLine"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorNoteSubtitleText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.285"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_word" />
 
-    <EditText
-        android:id="@+id/et_bd"
-        android:layout_width="318dp"
-        android:layout_height="416dp"
-        android:ems="10"
-        android:gravity="top|left"
-        android:hint="@string/et_bd"
-        android:fontFamily="@font/ubuntu_regular"
+            <View
+                android:id="@+id/eviewstkIndicator"
+                android:layout_width="5dp"
+                android:layout_height="46dp"
+                android:background="@drawable/input_password_indicator"
+                app:layout_constraintBottom_toBottomOf="@+id/et_tl"
+                app:layout_constraintEnd_toStartOf="@+id/et_tl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_wcount" />
 
-        android:inputType="textImeMultiLine"
-        android:textColorHint="@color/colorNoteSubtitleText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_tl"
-        app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/et_bd"
+                android:layout_width="322dp"
+                android:layout_height="413dp"
+                android:ems="10"
+                android:fontFamily="@font/ubuntu_regular"
+                android:gravity="top|left"
+                android:hint="@string/et_bd"
 
+                android:inputType="text|textMultiLine"
+                android:textColor="@color/design_default_color_surface"
+                android:textColorHint="@color/colorNoteSubtitleText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.166"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_tl"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+ </ScrollView>
     <LinearLayout
         android:id="@+id/select"
         android:layout_width="match_parent"
@@ -167,13 +196,13 @@
                 android:layout_weight="1">
 
                 <View
-                    android:id="@+id/viewCol1"
+                    android:id="@+id/eviewCol1"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/background_note_color_1" />
 
                 <ImageView
-                    android:id="@+id/imgCol1"
+                    android:id="@+id/eimgCol1"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
@@ -188,13 +217,13 @@
                 android:layout_weight="1">
 
                 <View
-                    android:id="@+id/viewCol2"
+                    android:id="@+id/eviewCol2"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/background_note_color_2" />
 
                 <ImageView
-                    android:id="@+id/imgCol2"
+                    android:id="@+id/eimgCol2"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
@@ -208,13 +237,13 @@
                 android:layout_weight="1">
 
                 <View
-                    android:id="@+id/viewCol3"
+                    android:id="@+id/eviewCol3"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/background_note_color_3" />
 
                 <ImageView
-                    android:id="@+id/imgol3"
+                    android:id="@+id/eimgCol3"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
@@ -228,13 +257,13 @@
                 android:layout_weight="1">
 
                 <View
-                    android:id="@+id/viewCol4"
+                    android:id="@+id/eviewCol4"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/background_note_color_4" />
 
                 <ImageView
-                    android:id="@+id/imgCol4"
+                    android:id="@+id/eimgCol4"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
@@ -248,13 +277,13 @@
                 android:layout_weight="1">
 
                 <View
-                    android:id="@+id/viewCol5"
+                    android:id="@+id/eviewCol5"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/background_note_color_5" />
 
                 <ImageView
-                    android:id="@+id/imgCol5"
+                    android:id="@+id/eimgCol5"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/app_name"
@@ -373,7 +402,7 @@
         app:layout_constraintBottom_toTopOf="@+id/select"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toEndOf="@+id/et_bd"
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.286">
 
