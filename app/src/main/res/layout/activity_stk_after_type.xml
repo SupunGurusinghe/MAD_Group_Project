@@ -18,9 +18,9 @@
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginRight="@dimen/_12sdp"
         android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back"
         app:tint="@color/colorIcons" />
 
     <TextView
@@ -76,12 +76,39 @@
             android:importantForAutofill="no"
             android:includeFontPadding="false"
             android:inputType="text"
-            android:text="@string/searchstkinput"
+            android:hint="@string/searchstkinput"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorTextHint"
             android:textSize="@dimen/_13ssp" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/passwordRecyclerView"
+        android:layout_width="427dp"
+        android:layout_height="646dp"
+        android:clipToPadding="false"
+        android:paddingStart="0dp"
+        android:paddingLeft="0dp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingRight="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_12sdp"
+        app:layout_constraintBottom_toTopOf="@+id/layoutFooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Searchstknotes" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="103dp"
+        android:layout_height="103dp"
+        app:layout_constraintBottom_toTopOf="@+id/layoutFooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Searchstknotes"
+        app:layout_constraintVertical_bias="0.974"
+        app:srcCompat="@drawable/ic_addplus" />
 
     <LinearLayout
         android:id="@+id/layoutFooter"
