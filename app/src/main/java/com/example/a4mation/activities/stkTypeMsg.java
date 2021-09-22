@@ -1,4 +1,4 @@
-package com.example.a4mation;
+package com.example.a4mation.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
