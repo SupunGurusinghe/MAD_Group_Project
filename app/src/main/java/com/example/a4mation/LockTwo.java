@@ -1,4 +1,4 @@
-package com.example.a4mation.activities;
+package com.example.a4mation;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -19,8 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.a4mation.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

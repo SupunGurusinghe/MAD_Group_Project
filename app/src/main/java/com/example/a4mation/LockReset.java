@@ -1,4 +1,4 @@
-package com.example.a4mation.activities;
+package com.example.a4mation;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +13,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import com.example.a4mation.R;
 
 public class LockReset extends AppCompatActivity {
 

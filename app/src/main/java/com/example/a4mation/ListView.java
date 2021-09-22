@@ -1,4 +1,4 @@
-package com.example.a4mation.activities;
+package com.example.a4mation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.a4mation.R;
 
-public class stkWelcomePage extends AppCompatActivity {
+public class ListView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stk_welcome_page);
+        setContentView(R.layout.activity_list_view);
     }
 }

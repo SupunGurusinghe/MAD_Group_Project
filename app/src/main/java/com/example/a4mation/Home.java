@@ -1,4 +1,4 @@
-package com.example.a4mation.activities;
+package com.example.a4mation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.example.a4mation.R;
 
 public class Home extends AppCompatActivity {
 
