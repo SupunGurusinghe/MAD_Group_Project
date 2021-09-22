@@ -16,11 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import android.support.v4.app.*;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.widget.Toolbar;
-
 
 import com.example.a4mation.R;
 
