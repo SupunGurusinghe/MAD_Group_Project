@@ -34,7 +34,7 @@
 
         android:textColor="@color/colorNoteSubtitleText"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_tl"
+        app:layout_constraintBottom_toTopOf="@+id/eet_tl"
         app:layout_constraintEnd_toEndOf="@+id/tv_sen"
         app:layout_constraintStart_toStartOf="@+id/tv_sen"
         app:layout_constraintTop_toBottomOf="@+id/tv_sen" />
@@ -50,7 +50,7 @@
         android:text="@string/tv_wcount"
         android:textColor="@color/colorNoteSubtitleText"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_tl"
+        app:layout_constraintBottom_toTopOf="@+id/eet_tl"
         app:layout_constraintEnd_toEndOf="@+id/tv_word"
         app:layout_constraintStart_toStartOf="@+id/tv_word"
         app:layout_constraintTop_toBottomOf="@+id/tv_word" />
@@ -114,14 +114,14 @@
 
         android:textColor="@color/colorNoteSubtitleText"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_tl"
+        app:layout_constraintBottom_toTopOf="@+id/eet_tl"
         app:layout_constraintEnd_toEndOf="@+id/tv_char"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="@+id/tv_char"
         app:layout_constraintTop_toBottomOf="@+id/tv_char" />
 
             <EditText
-                android:id="@+id/et_tl"
+                android:id="@+id/eet_tl"
                 android:layout_width="306dp"
                 android:layout_height="47dp"
                 android:layout_marginTop="40dp"
@@ -129,8 +129,7 @@
                 android:fontFamily="@font/ubuntu_regular"
                 android:gravity="top"
                 android:hint="@string/et_tl"
-
-                android:inputType="text|textMultiLine"
+                android:inputType="textMultiLine"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorNoteSubtitleText"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -143,13 +142,49 @@
                 android:layout_width="5dp"
                 android:layout_height="46dp"
                 android:background="@drawable/input_password_indicator"
-                app:layout_constraintBottom_toBottomOf="@+id/et_tl"
-                app:layout_constraintEnd_toStartOf="@+id/et_tl"
+                app:layout_constraintBottom_toBottomOf="@+id/eet_tl"
+                app:layout_constraintEnd_toStartOf="@+id/eet_tl"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_wcount" />
 
+            <ImageView
+                android:id="@+id/eimgStk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/eet_tl" />
+            <LinearLayout
+                android:id="@+id/ell_web"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/eimgStk"
+                app:layout_constraintTop_toBottomOf="@id/eet_tl">
+
+                <TextView
+                    android:id="@+id/eweburl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+
             <EditText
-                android:id="@+id/et_bd"
+                android:id="@+id/eet_bd"
                 android:layout_width="322dp"
                 android:layout_height="413dp"
                 android:ems="10"
@@ -164,13 +199,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.166"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_tl"
+                app:layout_constraintTop_toBottomOf="@+id/eimgStk"
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
  </ScrollView>
     <LinearLayout
-        android:id="@+id/select"
+        android:id="@+id/eselect"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_140sdp"
         android:background="@drawable/background_miscellaneous"
@@ -308,7 +343,7 @@
             android:layout_height="64dp">
 
             <LinearLayout
-                android:id="@+id/uadding"
+                android:id="@+id/euadding"
                 android:layout_width="171dp"
                 android:layout_height="54dp"
 
@@ -321,7 +356,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/img_link"
+                    android:id="@+id/eimg_link"
                     android:layout_width="40dp"
                     android:layout_height="35dp"
                     android:contentDescription="@string/app_name"
@@ -329,7 +364,7 @@
                     app:tint="@color/colorIcons" />
 
                 <TextView
-                    android:id="@+id/tv_urladding"
+                    android:id="@+id/etv_urladding"
                     android:layout_width="161dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -343,7 +378,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/pAdding"
+                android:id="@+id/epAdding"
                 android:layout_width="202dp"
                 android:layout_height="54dp"
 
@@ -356,7 +391,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/img_img"
+                    android:id="@+id/eimg_img"
                     android:layout_width="41dp"
                     android:layout_height="54dp"
                     android:contentDescription="@string/app_name"
@@ -364,7 +399,7 @@
                     app:tint="@color/colorIcons" />
 
                 <TextView
-                    android:id="@+id/tv_4toadding"
+                    android:id="@+id/tv_e4toadding"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -388,7 +423,7 @@
                 android:orientation="vertical">
 
                 <SeekBar
-                    android:id="@+id/sBar"
+                    android:id="@+id/esBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -399,7 +434,7 @@
         android:layout_width="70dp"
         android:layout_height="357dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/select"
+        app:layout_constraintBottom_toTopOf="@+id/eselect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.238"
 
@@ -426,7 +461,7 @@
         </ImageView>
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/homeimg"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:background="@drawable/stkbackground_green"
@@ -439,7 +474,7 @@
         </ImageView>
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/stkdelete"
             android:layout_width="38dp"
             android:layout_height="34dp"
             android:background="@drawable/background_delete"
