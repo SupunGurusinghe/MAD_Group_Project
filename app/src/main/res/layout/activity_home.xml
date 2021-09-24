@@ -69,6 +69,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
+                    android:id="@+id/layoutTodoHome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorbox1"
@@ -76,6 +77,12 @@
                     android:orientation="vertical"
                     android:paddingTop="40dp"
                     android:paddingBottom="40dp">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/ic_note"
+                        app:tint="@color/colorWhite" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -86,12 +93,6 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp"
                         android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        app:srcCompat="@drawable/ic_note"
-                        app:tint="@color/colorWhite" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

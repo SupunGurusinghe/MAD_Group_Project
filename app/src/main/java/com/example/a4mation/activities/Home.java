@@ -11,7 +11,7 @@ import com.example.a4mation.R;
 
 public class Home extends AppCompatActivity {
 
-    private LinearLayout layoutPasswordMain;
+    private LinearLayout layoutPasswordMain,layoutTodoHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,5 +28,16 @@ public class Home extends AppCompatActivity {
                 );
             }
         });
+
+        layoutTodoHome = findViewById(R.id.layoutTodoHome);
+        layoutTodoHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(
+                        new Intent(Home.this, TodoHome.class)
+                );
+            }
+        });
+
     }
 }
