@@ -96,7 +96,7 @@ public class stkTypeMsg extends AppCompatActivity {
         imgOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseHelper mdb = new DatabaseHelper(stkTypeMsg.this);
+                DbHandler mdb = new DbHandler(stkTypeMsg.this);
                 mdb.insertData(etitle.getText().toString().trim(), ebody.getText().toString().trim(),selectedImagePath, stkColor);
             }
         });

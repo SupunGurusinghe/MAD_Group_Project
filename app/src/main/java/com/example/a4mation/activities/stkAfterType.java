@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class stkAfterType extends AppCompatActivity {
     FloatingActionButton fab;
     RecyclerView recyclerView;
-    DatabaseHelper mid;
+    DbHandler mid;
     ArrayList<String> ID, Title, Timestamp, Color, Body, Image;
     customAdapter cus;
 
@@ -35,7 +35,7 @@ public class stkAfterType extends AppCompatActivity {
                 startActivity(new Intent(stkAfterType.this, stkTypeMsg.class));
             }
         });
-        mid = new DatabaseHelper(stkAfterType.this);
+        mid = new DbHandler(stkAfterType.this);
         ID = new ArrayList<>();
         Title = new ArrayList<>();
         Timestamp = new ArrayList<>();
