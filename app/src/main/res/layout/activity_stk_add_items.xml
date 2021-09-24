@@ -8,7 +8,7 @@
     tools:context=".activities.stkAddItems">
 
     <ImageView
-        android:id="@+id/img_noteempty"
+        android:id="@+id/img_notestkempty"
         android:layout_width="191dp"
         android:layout_height="143dp"
         app:srcCompat="@drawable/ic_emptynote"
@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_noteempty"
+        app:layout_constraintTop_toBottomOf="@+id/img_notestkempty"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

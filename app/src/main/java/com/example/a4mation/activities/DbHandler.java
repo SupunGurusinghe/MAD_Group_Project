@@ -1,13 +1,18 @@
 package com.example.a4mation.activities;
 
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -19,6 +24,7 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "todo";
     public static final String TABLE1_NAME = "lock_table";
     public static final String TABLE2_NAME = "security_table";
+    public static final String TABLE_NAME3 = "Sticky_Note_table";
 
     // Column Names
     private static final String ID = "id";
@@ -41,8 +47,19 @@ public class DbHandler extends SQLiteOpenHelper {
     public static final String COL2_3 = "Answer";
     public static final String COL2_4 = "Lock";
 
+    //Sticky_notes table columns
+    private static final String C_ID = "ID";
+    private static final String C_TITLE = "TITLE";
+    private static final String C_BODY = "BODY";
+    private static final String C_IMAGE = "IMAGE";
+    private static final String C_COLOR = "COLORP";
+    private static final String C_TIMESTAMP = "TIMESTAMP";
+    private Context context;
+
     public DbHandler(@Nullable Context context) {
+
         super(context, DB_NAME, null, VERSION);
+        this.context = context;
     }
 
     @Override
@@ -59,6 +76,11 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL(TABLE_CREATE_QUERY);
         db.execSQL("create table "+ TABLE1_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, Password TEXT, Description TEXT, DateTime TEXT, Color TEXT)");
         db.execSQL("create table "+ TABLE2_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, SQuestion TEXT, Answer TEXT, Lock TEXT)");
+        String query =
+                "CREATE TABLE " + TABLE_NAME3 +
+                        " (" + C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + C_TITLE + " TEXT, " + C_BODY + " TEXT, " + C_TIMESTAMP + " TEXT, " + C_IMAGE + " TEXT, " + C_COLOR + " TEXT);";
+        db.execSQL(query);
+
     }
 
     @Override
@@ -72,6 +94,9 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ TABLE1_NAME);
         onCreate(db);
         db.execSQL("DROP TABLE IF EXISTS "+ TABLE2_NAME);
+        onCreate(db);
+       // for sticky note table
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME3);
         onCreate(db);
     }
 
@@ -284,4 +309,78 @@ public class DbHandler extends SQLiteOpenHelper {
         else
             return true;
     }
+
+
+
+
+
+
+
+
+    //sticky notes functions
+
+
+    public String getDateTime(){
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date;
+        date = new Date();
+        return dateFormat.format(date);
+    }
+
+    public void insertData(String Title, String Body, String Image, String Color) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(C_TITLE, Title);
+        values.put(C_BODY, Body);
+        values.put(C_IMAGE, Image);
+        values.put(C_TIMESTAMP, getDateTime());
+        values.put(C_COLOR, Color);
+        long result = db.insert(TABLE_NAME3, null, values);
+
+        if (result == -1)
+            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(context, "saved", Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    Cursor readstk(){
+
+        String query = "SELECT * FROM " +TABLE_NAME3;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+
+    void updatestk(String row_id, String Title, String Body, String Color, String Image){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues val = new ContentValues();
+        val.put(C_TITLE, Title);
+        val.put(C_BODY, Body);
+        val.put(C_COLOR, Color);
+        val.put(C_IMAGE, Image);
+        val.put(C_TIMESTAMP, getDateTime());
+        long res = db.update(TABLE_NAME3, val, "ID=?", new String[]{row_id});
+        if (res == -1)
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(context, "Successfully updated", Toast.LENGTH_SHORT).show();
+    }
+
+    void deleteonestk(String row_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long re = db.delete(TABLE_NAME3, "ID=?", new String[]{row_id});
+        if(re == -1)
+            Toast.makeText(context, "can't delete", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
+    }
 }
+
+

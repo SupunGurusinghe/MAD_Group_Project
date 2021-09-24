@@ -22,7 +22,7 @@
         <activity
             android:name=".activities.stkAfterType"
             android:exported="true"
-            android:label="@string/et_stickynote" />
+            android:label="@string/et_stickynote"/>
         <activity
             android:name=".activities.ListView"
             android:exported="true" />

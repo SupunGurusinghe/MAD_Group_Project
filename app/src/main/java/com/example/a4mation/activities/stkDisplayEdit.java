@@ -75,7 +75,7 @@ public class stkDisplayEdit extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                DatabaseHelper dbm = new DatabaseHelper(stkDisplayEdit.this);
+                DbHandler dbm = new DbHandler(stkDisplayEdit.this);
                 dbm.updatestk(id, Title.getText().toString().trim(), Body.getText().toString().trim(), estkColor, eselectedImagePath);
             }
         });
@@ -232,7 +232,7 @@ public class stkDisplayEdit extends AppCompatActivity {
         view.findViewById(R.id.stkDeleteNote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseHelper dbd = new DatabaseHelper(stkDisplayEdit.this);
+                DbHandler dbd = new DbHandler(stkDisplayEdit.this);
                 dbd.deleteonestk(id);
             }
         });
