@@ -8,8 +8,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -43,15 +45,49 @@ public class stkDisplayEdit extends AppCompatActivity {
     private String eselectedImagePath;
     private AlertDialog edialogAddUrl;
     private ImageView eimgStk;
+    private ImageView update, delete;
+    private EditText ID, Title, Timestamp, Body;
+    private ImageView imageset;
+    private String id,title,body, timestamp, color, image;
+    private AlertDialog dialogDeletestkNote;
 
 
 
+
+
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stk_display_edit);
         etextWebUrl = findViewById(R.id.eweburl);
         ewebLinearLayout = findViewById(R.id.ell_web);
+        Title = findViewById(R.id.eet_tl);
+        Body = findViewById(R.id.eet_bd);
+        imageset = findViewById(R.id.eimgStk);
+        update = findViewById(R.id.img_o);
+        delete = findViewById(R.id.stkdelete);
+        eselectedImagePath = "";
+
+        getstkintentdata();
+
+        update.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                DatabaseHelper dbm = new DatabaseHelper(stkDisplayEdit.this);
+                dbm.updatestk(id, Title.getText().toString().trim(), Body.getText().toString().trim(), estkColor, eselectedImagePath);
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                showDeletestkNoteDialog();
+
+                  }
+        });
+
 
     eviewstkIndicator = findViewById(R.id.eviewstkIndicator);
     estkColor = "#333333";
@@ -160,6 +196,58 @@ public class stkDisplayEdit extends AppCompatActivity {
 
 
     }
+    void getstkintentdata(){
+        if (getIntent().hasExtra("ID") && getIntent().hasExtra("Title") && getIntent().hasExtra("Timestamp")) {
+            //getting data from intent
+            id = getIntent().getStringExtra("ID");
+            title = getIntent().getStringExtra("Title");
+            timestamp = getIntent().getStringExtra("Timestamp");
+            body = getIntent().getStringExtra("Body");
+            estkColor = getIntent().getStringExtra("Color");
+            image = getIntent().getStringExtra("Image");
+
+            //setting intent data
+            Title.setText(title);
+            Body.setText(body);
+
+
+
+        } else {
+            Toast.makeText(this, "Nodata",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void showDeletestkNoteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(stkDisplayEdit.this);
+        View view = LayoutInflater.from(this).inflate(
+                R.layout.layout_delete_stk,
+                (ViewGroup) findViewById(R.id.stk_dlt_layout)
+        );
+        builder.setView(view);
+        dialogDeletestkNote = builder.create();
+        if (dialogDeletestkNote.getWindow() != null) {
+            dialogDeletestkNote.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        view.findViewById(R.id.stkDeleteNote).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseHelper dbd = new DatabaseHelper(stkDisplayEdit.this);
+                dbd.deleteonestk(id);
+            }
+        });
+
+
+        view.findViewById(R.id.stkCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogDeletestkNote.dismiss();
+            }
+        });
+        dialogDeletestkNote.show();
+    }
+
+
 
 
     private void eviewstkIndicatorcolor(){
@@ -193,14 +281,16 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK){
         if(data != null){
-        Uri selectedImageUri = data.getData();
-        if(selectedImageUri != null){
+        Uri eselectedImageUri = data.getData();
+        if(eselectedImageUri != null){
 
         try{
-        InputStream inputstream = getContentResolver().openInputStream(selectedImageUri);
+        InputStream inputstream = getContentResolver().openInputStream(eselectedImageUri);
         Bitmap bitmap = BitmapFactory.decodeStream(inputstream);
         eimgStk.setImageBitmap(bitmap);
         eimgStk.setVisibility(View.VISIBLE);
+
+            eselectedImagePath = getPathFormUri(eselectedImageUri);
 
         } catch (Exception exception) {
         Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
@@ -210,6 +300,22 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
         }
 
         }
+    private String getPathFormUri(Uri contenturi){
+
+        String filepath;
+        Cursor cursor = getContentResolver().query(contenturi, null, null, null, null);
+        if(cursor == null) {
+            filepath = contenturi.getPath();
+
+        }else{
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex("_data");
+            filepath = cursor.getString(index);
+            cursor.close();
+
+        }
+        return filepath;
+    }
 
 
 
@@ -253,4 +359,5 @@ public void onClick(View view) {
         }
         edialogAddUrl.show();
         }
+
 }

@@ -192,7 +192,7 @@ public class LockThree extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(LockThree.this);
         View view = LayoutInflater.from(this).inflate(
                 R.layout.layout_delete_note,
-                (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer)
+                (ViewGroup) findViewById(R.id.stk_dlt_layout)
         );
         builder.setView(view);
         dialogDeleteNote = builder.create();

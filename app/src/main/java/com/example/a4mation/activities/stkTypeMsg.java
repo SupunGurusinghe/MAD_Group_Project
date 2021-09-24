@@ -8,14 +8,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
-import android.os.Binder;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,22 +34,24 @@ import android.content.pm.PackageManager;
 import android.provider.MediaStore;
 
 import com.example.a4mation.R;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class stkTypeMsg extends AppCompatActivity {
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
-    private TextView textWebUrl;
+    private TextView textWebUrl, tv_count, tv_wcount;
     private LinearLayout webLinearLayout;
     private String selectedImagePath;
     private AlertDialog dialogAddUrl;
     private ImageView imgStk;
     private String stkColor;
     private View viewstkIndicator;
-
+    private ImageView imgOk;
+    private EditText etitle ,ebody ,eurl;
+    private String title, body, url, timestamp;
+    private Uri selectedImageUri;
+    private View viewcolor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,46 @@ public class stkTypeMsg extends AppCompatActivity {
         viewstkIndicator = findViewById(R.id.viewstkIndicator);
         textWebUrl = findViewById(R.id.weburl);
         webLinearLayout = findViewById(R.id.ll_web);
+        imgOk = findViewById(R.id.img_ok);
+        etitle = findViewById(R.id.et_tl);
+        ebody = findViewById(R.id.et_bd);
+        eurl = findViewById(R.id.et_inputurl);
+        selectedImagePath = "";
+        tv_count = findViewById(R.id.tv_ccount);
+        tv_wcount = findViewById(R.id.tv_wcount);
+
+
+
+        ebody.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int character = ebody.length();
+                int ch1 = etitle.length();
+                int total = character + ch1;
+                String convert = String.valueOf(total);
+                tv_count.setText(convert);
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        imgOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseHelper mdb = new DatabaseHelper(stkTypeMsg.this);
+                mdb.insertData(etitle.getText().toString().trim(), ebody.getText().toString().trim(),selectedImagePath, stkColor);
+            }
+        });
 
 
         stkColor = "#333333";
@@ -163,8 +207,26 @@ public class stkTypeMsg extends AppCompatActivity {
 
 
     }
+    public static int wordcount(String line) {
+        int numWords = 0;
+        int index = 0;
+        boolean prevWhiteSpace = true;
+        while (index < line.length()) {
+            char c = line.charAt(index++);
+            boolean currWhiteSpace = Character.isWhitespace(c);
+            if (prevWhiteSpace && !currWhiteSpace) {
+                numWords++;
+            }
+            prevWhiteSpace = currWhiteSpace;
+        }
+        return numWords;
+    }
+
+
 
     private void selectImage() {
+
+
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE);
@@ -189,7 +251,7 @@ public class stkTypeMsg extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK){
             if(data != null){
-                Uri selectedImageUri = data.getData();
+                selectedImageUri = data.getData();
                 if(selectedImageUri != null){
 
                     try{
@@ -197,6 +259,8 @@ public class stkTypeMsg extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeStream(inputstream);
                         imgStk.setImageBitmap(bitmap);
                         imgStk.setVisibility(View.VISIBLE);
+
+                        selectedImagePath = getPathFormUri(selectedImageUri);
 
                     } catch (Exception exception) {
                         Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
@@ -206,6 +270,22 @@ public class stkTypeMsg extends AppCompatActivity {
         }
 
     }
+private String getPathFormUri(Uri contenturi){
+
+        String filepath;
+        Cursor cursor = getContentResolver().query(contenturi, null, null, null, null);
+        if(cursor == null) {
+            filepath = contenturi.getPath();
+
+        }else{
+                cursor.moveToFirst();
+                int index = cursor.getColumnIndex("_data");
+                filepath = cursor.getString(index);
+                cursor.close();
+
+            }
+            return filepath;
+        }
 
 
 
@@ -255,4 +335,22 @@ public class stkTypeMsg extends AppCompatActivity {
         GradientDrawable gradientDrawable = (GradientDrawable) viewstkIndicator.getBackground();
         gradientDrawable.setColor(Color.parseColor(stkColor));
     }
+
+
+/*
+    public void AddData(){
+        imgOk.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean inserted = dbHelper.insertData(etitle.getText().toString(),ebody.getText().toString());
+                        if(inserted = true){
+                            Toast.makeText(stkTypeMsg.this, "saved", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                            Toast.makeText(stkTypeMsg.this, "unsuccessfull", Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+    }*/
 }

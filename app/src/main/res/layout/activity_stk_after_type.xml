@@ -67,7 +67,7 @@
         <EditText
             android:id="@+id/searchstkinput"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="48dp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginLeft="@dimen/_12sdp"
             android:background="@null"
@@ -84,9 +84,9 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/passwordRecyclerView"
-        android:layout_width="399dp"
-        android:layout_height="521dp"
+        android:id="@+id/stkRecyclerView"
+        android:layout_width="394dp"
+        android:layout_height="528dp"
         android:clipToPadding="false"
         android:paddingStart="0dp"
         android:paddingLeft="0dp"
@@ -95,20 +95,10 @@
         android:paddingBottom="@dimen/_12sdp"
         app:layout_constraintBottom_toTopOf="@+id/layoutFooter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Searchstknotes" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
-        app:layout_constraintBottom_toTopOf="@+id/layoutFooter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Searchstknotes"
-        app:layout_constraintVertical_bias="0.974"
-        app:srcCompat="@drawable/ic_addplus" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
         android:id="@+id/layoutFooter"
@@ -121,6 +111,20 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_float"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/stkRecyclerView"
+        app:layout_constraintEnd_toEndOf="@+id/stkRecyclerView"
+        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintStart_toStartOf="@+id/stkRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/Searchstknotes"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_addplus" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

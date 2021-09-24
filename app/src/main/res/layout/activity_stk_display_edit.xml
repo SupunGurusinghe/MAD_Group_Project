@@ -448,7 +448,7 @@
         </ImageView>
 
         <ImageView
-            android:id="@+id/img_ok"
+            android:id="@+id/img_o"
             android:layout_width="38dp"
             android:layout_height="37dp"
             android:background="@drawable/stkbackground_green"

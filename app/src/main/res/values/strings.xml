@@ -92,6 +92,8 @@
     <string name="search_list">search list Here</string>
     <string name="tv_backhome">Easy sticky Note</string>
     <string name="searchstkinput">search sticky note here</string>
+    <string name="tv_dltstk">Delete Sticky note</string>
+    <string name="stkDeleteNote">Delete</string>
 
 
 </resources>
