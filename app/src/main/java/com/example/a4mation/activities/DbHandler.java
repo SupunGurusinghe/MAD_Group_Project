@@ -25,6 +25,7 @@ public class DbHandler extends SQLiteOpenHelper {
     public static final String TABLE1_NAME = "lock_table";
     public static final String TABLE2_NAME = "security_table";
     public static final String TABLE_NAME3 = "Sticky_Note_table";
+    private static final String TABLE_NAME4 = "adding_items";
 
     // Column Names
     private static final String ID = "id";
@@ -32,6 +33,11 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String DESCRIPTION = "description";
     private static final String STARTED = "started";
     private static final String FINISHED = "finished";
+
+    // Column add items
+    private static final String COLUMN_ID = "id";
+    private static final String COLUMN_ITEM_NAME = "item";
+    private static final String COLUMN_QUANTITY = "quantity";
 
     //Lock_Table columns
     public static final String COL_1 = "ID";
@@ -81,6 +87,15 @@ public class DbHandler extends SQLiteOpenHelper {
                         " (" + C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + C_TITLE + " TEXT, " + C_BODY + " TEXT, " + C_TIMESTAMP + " TEXT, " + C_IMAGE + " TEXT, " + C_COLOR + " TEXT);";
         db.execSQL(query);
 
+
+        String query2 =
+                "CREATE TABLE " + TABLE_NAME4 +
+                        " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_ITEM_NAME + " TEXT, " +
+                        COLUMN_QUANTITY + " INTEGER);";
+
+        db.execSQL(query2);
+
     }
 
     @Override
@@ -98,6 +113,11 @@ public class DbHandler extends SQLiteOpenHelper {
        // for sticky note table
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME3);
         onCreate(db);
+
+        // add item
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME4);
+        onCreate(db);
+
     }
 
     public void addToDo(ToDo toDo){
@@ -381,6 +401,64 @@ public class DbHandler extends SQLiteOpenHelper {
         else
             Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
     }
+
+    void addItems(String item_name, int quantity){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put (COLUMN_ITEM_NAME, item_name);
+        cv.put (COLUMN_QUANTITY, quantity);
+        long result = db.insert(TABLE_NAME4, null,cv);
+        if(result == -1){
+            Toast.makeText(context,"Failed", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context,"Added Successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    Cursor readAllData(){
+        String query = "SELECT * FROM " + TABLE_NAME4;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    // Update items
+    void updateData(String row_id, String item, String quantity){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ITEM_NAME, item);
+        cv.put(COLUMN_QUANTITY, quantity);
+
+        long result = db.update(TABLE_NAME4, cv, "id=?", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context, "Failed to Update", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Updated", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Delete
+
+    void deleteOneRow (String row_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME4, "id=?", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context,"Failed to Delete", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context,"Successfully Deleted",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void deleteAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME4);
+    }
+
 }
 
 
