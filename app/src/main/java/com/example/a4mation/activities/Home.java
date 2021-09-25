@@ -24,7 +24,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(
-                        new Intent(Home.this, LockMain.class)
+                        new Intent(Home.this, PasswordMain.class)
                 );
             }
         });
