@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toTopOf="@id/imageBack" />
 
             <TextView
-                android:id="@+id/InputPasswordTitle"
+                android:id="@+id/InputPasswordTitle2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -70,20 +70,21 @@
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintTop_toBottomOf="@id/imageBack"/>
 
+
             <TextView
-                android:id="@+id/textDateTime"
+                android:id="@+id/textDateTime2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu_regular"
                 android:includeFontPadding="false"
                 android:textColor="@color/colorIcons"
                 android:textSize="@dimen/_10ssp"
-                app:layout_constraintEnd_toEndOf="@id/InputPasswordTitle"
-                app:layout_constraintStart_toStartOf="@id/InputPasswordTitle"
-                app:layout_constraintTop_toBottomOf="@id/InputPasswordTitle" />
+                app:layout_constraintEnd_toEndOf="@id/InputPasswordTitle2"
+                app:layout_constraintStart_toStartOf="@id/InputPasswordTitle2"
+                app:layout_constraintTop_toBottomOf="@id/InputPasswordTitle2" />
 
             <TextView
-                android:id="@+id/inputPassword"
+                android:id="@+id/inputPassword2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -101,7 +102,7 @@
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/viewPasswordIndicator"
-                app:layout_constraintTop_toBottomOf="@id/textDateTime"
+                app:layout_constraintTop_toBottomOf="@id/textDateTime2"
                 app:layout_constraintBottom_toTopOf="@id/key"/>
 
             <EditText
@@ -124,7 +125,7 @@
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/viewPasswordIndicator"
-                app:layout_constraintTop_toBottomOf="@id/inputPassword"/>
+                app:layout_constraintTop_toBottomOf="@id/inputPassword2"/>
 
             <View
                 android:id="@+id/viewPasswordIndicator"
@@ -132,13 +133,13 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:background="@drawable/input_password_indicator"
-                app:layout_constraintBottom_toBottomOf="@id/inputPassword"
+                app:layout_constraintBottom_toBottomOf="@id/inputPassword2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/inputPassword"
+                app:layout_constraintTop_toTopOf="@id/inputPassword2"
                 android:layout_marginLeft="@dimen/_12sdp" />
 
             <ImageView
-                android:id="@+id/imageNote"
+                android:id="@+id/imageNote2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -159,7 +160,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/imageNote">
+                app:layout_constraintTop_toBottomOf="@id/imageNote2">
 
                 <TextView
                     android:id="@+id/textWebUrl"
@@ -175,7 +176,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/inputDescription"
+                android:id="@+id/inputDescription2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -213,7 +214,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/inputDescription"
+                app:layout_constraintTop_toBottomOf="@id/inputDescription2"
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

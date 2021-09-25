@@ -12,20 +12,24 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.a4mation.R;
 
 public class LockReset extends AppCompatActivity {
+    DbHandler myDb;
 
     private ImageView imageBack;
     private Button setKeyButton;
+    private EditText addNewPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_reset);
-
 
         // Define ActionBar object
         ActionBar actionBar;
@@ -52,6 +56,10 @@ public class LockReset extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatusBar));
         }
 
+        //Database creation
+        myDb = new DbHandler(this);
+        //Update
+        addNewPassword = (EditText)findViewById(R.id.addNewPassword);
 
         //come back
         imageBack = findViewById(R.id.imageBack);
@@ -59,7 +67,7 @@ public class LockReset extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(
-                        new Intent(LockReset.this, LockMain.class)
+                        new Intent(LockReset.this, PasswordMain.class)
                 );
             }
         });
@@ -69,9 +77,19 @@ public class LockReset extends AppCompatActivity {
         setKeyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(
-                        new Intent(LockReset.this, LockTwo.class)
-                );
+                boolean isUpdated = myDb.updateSecurityKey(addNewPassword.getText().toString());
+                if(isUpdated == true){
+                    Toast.makeText(LockReset.this, "Successfully Inserted", Toast.LENGTH_LONG).show();
+                    startActivity(
+                            new Intent(LockReset.this, PasswordMain.class)
+                    );
+                }else{
+                    Toast.makeText(LockReset.this, "Failed to change key", Toast.LENGTH_LONG).show();
+                    startActivity(
+                            new Intent(LockReset.this, PasswordMain.class)
+                    );
+                }
+
             }
         });
     }
