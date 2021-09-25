@@ -3,7 +3,6 @@
     package="com.example.a4mation" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -13,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.4Mation" >
+
         <activity
             android:name=".activities.PasswordMain"
             android:exported="true" />
@@ -32,7 +32,7 @@
             android:name=".activities.stkDisplayEdit"
             android:exported="true"
             android:label="@string/et_stickynote"
-            android:parentActivityName=".activities.stkAfterType"/>
+            android:parentActivityName=".activities.stkAfterType" />
         <activity
             android:name=".activities.stkAfterType"
             android:exported="true"
@@ -45,8 +45,8 @@
             android:name=".activities.stkTypeMsg"
             android:exported="true"
             android:label="@string/et_stickynote"
-            android:windowSoftInputMode="adjustResize"
-            android:parentActivityName=".activities.stkAfterType"/>
+            android:parentActivityName=".activities.stkAfterType"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.stkAddItems"
             android:exported="true"

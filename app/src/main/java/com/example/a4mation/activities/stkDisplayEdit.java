@@ -52,13 +52,15 @@ public class stkDisplayEdit extends AppCompatActivity {
     private String eselectedImagePath;
     private AlertDialog edialogAddUrl;
     private ImageView eimgStk;
-    private ImageView update, delete;
+    private ImageView update, delete,homeimg;
     private EditText ID, Title, Timestamp, Body;
     private ImageView imageset;
     private String id,title,body, timestamp, color, image;
     private AlertDialog dialogDeletestkNote;
     int eseekValue;
     private SeekBar esBar;
+    private static final String SHARED_PRESS = "prefs";
+
 
 
 
@@ -116,6 +118,16 @@ public class stkDisplayEdit extends AppCompatActivity {
         eselectedImagePath = "";
         esBar = findViewById(R.id.esBar);
         tv_ccount = findViewById(R.id.tv_ccount);
+        homeimg = findViewById(R.id.homeimg);
+        //init paper
+
+        homeimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         esBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
