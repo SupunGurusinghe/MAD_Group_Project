@@ -145,6 +145,9 @@ public class stkTypeMsg extends AppCompatActivity {
                 int total = character + ch1;
                 String convert = String.valueOf(total);
                 tv_count.setText(convert);
+                int totalWord = wordcount(ebody.getText().toString()) + wordcount(etitle.getText().toString());
+                String v = String.valueOf(totalWord);
+                tv_wcount.setText(v);
 
 
             }
