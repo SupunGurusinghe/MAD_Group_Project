@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="@id/imageDeleteNote" />
 
     <TextView
-        android:id="@+id/tv_stktext"
+        android:id="@+id/textDeleteNoteMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
@@ -71,7 +71,7 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorTextHint"
         android:textSize="@dimen/_13ssp"
-        app:layout_constraintTop_toBottomOf="@id/tv_stktext"/>
+        app:layout_constraintTop_toBottomOf="@id/textDeleteNoteMessage"/>
 
     <TextView
         android:id="@+id/textDeleteNote"
