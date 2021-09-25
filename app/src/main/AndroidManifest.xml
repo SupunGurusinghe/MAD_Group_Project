@@ -18,11 +18,16 @@
         <activity
             android:name=".activities.stkDisplayEdit"
             android:exported="true"
-            android:label="@string/et_stickynote" />
+            android:label="@string/et_stickynote"
+            android:parentActivityName=".activities.stkAfterType"/>
         <activity
             android:name=".activities.stkAfterType"
             android:exported="true"
-            android:label="@string/et_stickynote"/>
+            android:label="@string/et_stickynote"
+            android:parentActivityName=".activities.Home">
+
+
+        </activity>
         <activity
             android:name=".activities.ListView"
             android:exported="true" />
@@ -30,7 +35,8 @@
             android:name=".activities.stkTypeMsg"
             android:exported="true"
             android:label="@string/et_stickynote"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".activities.stkAfterType"/>
         <activity
             android:name=".activities.stkAddItems"
             android:exported="true"

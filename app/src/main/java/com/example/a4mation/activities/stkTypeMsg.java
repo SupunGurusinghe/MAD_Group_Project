@@ -1,6 +1,7 @@
 package com.example.a4mation.activities;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,9 +24,12 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
@@ -52,11 +57,50 @@ public class stkTypeMsg extends AppCompatActivity {
     private String title, body, url, timestamp;
     private Uri selectedImageUri;
     private View viewcolor;
+    private SeekBar sBar;
+    int seekValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stk_type_msg);
+
+        // Define ActionBar object
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+
+
+
+// Define ColorDrawable object and parse color
+// using parseColor method
+// with color hash code as its parameter
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#669900"));
+
+
+
+
+
+// Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+
+
+// Change Toolbar text
+        getSupportActionBar().setTitle("");
+// getSupportActionBar().setSubtitle("Main");
+
+
+
+// Change the color of status bar
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorNew));
+        }
+
+
         viewstkIndicator = findViewById(R.id.viewstkIndicator);
         textWebUrl = findViewById(R.id.weburl);
         webLinearLayout = findViewById(R.id.ll_web);
@@ -67,6 +111,24 @@ public class stkTypeMsg extends AppCompatActivity {
         selectedImagePath = "";
         tv_count = findViewById(R.id.tv_ccount);
         tv_wcount = findViewById(R.id.tv_wcount);
+        sBar = findViewById(R.id.sBar);
+        sBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                seekValue= i;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                ebody.setText(ebody.getText().toString());
+                ebody.setTextSize(seekValue);
+            }
+        });
 
 
 
