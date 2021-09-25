@@ -1,118 +1,74 @@
 package com.example.a4mation.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.example.a4mation.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
+public class ListView extends AppCompatActivity {
 
-public class ListView  extends AppCompatActivity {
-
-    RecyclerView recyclerView;
-    FloatingActionButton add_button;
-
-    DbHandler myDB;
-    ArrayList<String> item_id, item_name,item_quentity;
-    ListCustomAdapter myCustomAdapter;
+    public static final int REQUEST_CODE_ADD_NOTE =1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_view);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        add_button = findViewById(R.id.add_button);
-        add_button.setOnClickListener(view -> {
-            Intent intent = new Intent(ListView .this, AddItems.class);
-            startActivity(intent);
-        });
 
-        myDB = new DbHandler(ListView.this);
-        item_id = new ArrayList<>();
-        item_name = new ArrayList<>();
-        item_quentity = new ArrayList<>();
+        // Define ActionBar object
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
 
-        storeDataInArrays();
 
-        myCustomAdapter = new ListCustomAdapter(ListView.this, this, item_id, item_name, item_quentity);
-        recyclerView.setAdapter(myCustomAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ListView .this));
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0){
-            recreate();
+// Define ColorDrawable object and parse color
+// using parseColor method
+// with color hash code as its parameter
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#FF6347"));
+
+
+
+// Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+
+
+// Change Toolbar text
+        getSupportActionBar().setTitle("List");
+// getSupportActionBar().setSubtitle("Main");
+
+
+
+// Change the color of status bar
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.listItemStatusBar));
         }
-    }
 
-    void storeDataInArrays(){
-        Cursor cursor = myDB.readAllData();
-        if(cursor.getCount() == 0){
-            Toast.makeText(this,"No data", Toast.LENGTH_SHORT).show();
-        }else{
-            while (cursor.moveToNext()){
-                item_id.add(cursor.getString(0));
-                item_name.add(cursor.getString(1));
-                item_quentity.add(cursor.getString(2));
-            }
-        }
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.list_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.delete_all){
-            confirmDialog();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    void confirmDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete All");
-        builder.setMessage("Are you sure you want to delete all Data?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        ImageView imageAddNoteMain = findViewById(R.id.imageAddNoteMain);
+        imageAddNoteMain.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                DbHandler myDB = new DbHandler(ListView .this);
-                myDB.deleteAllData();
-                //Refresh Activity
-                Intent intent = new Intent(ListView .this,MainActivity.class);
-                startActivity(intent);
-                finish();
+            public void onClick(View view) {
+                startActivityForResult(new Intent(getApplicationContext(),CreateNewList.class),
+                        REQUEST_CODE_ADD_NOTE);
             }
         });
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
-            }
-        });
-
-        builder.create().show();
     }
 }
