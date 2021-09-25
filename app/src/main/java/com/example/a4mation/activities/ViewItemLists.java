@@ -62,7 +62,7 @@ public class ViewItemLists extends AppCompatActivity {
 
 
 // Change Toolbar text
-        getSupportActionBar().setTitle("Lock Password");
+        getSupportActionBar().setTitle("Item List");
 // getSupportActionBar().setSubtitle("Main");
 
 

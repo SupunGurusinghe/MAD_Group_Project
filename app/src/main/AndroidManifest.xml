@@ -12,21 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.4Mation">
         <activity
+            android:name=".activities.ListView"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".activities.CreateNewList"
+            android:exported="true" />
+        <activity
             android:name=".activities.List_Item_Update"
             android:label="Update Items"
             android:parentActivityName=".activities.ViewItemLists" />
         <activity
             android:name=".activities.ViewItemLists"
-            android:exported="true">
+            android:label="Add Items"
+            android:parentActivityName=".activities.CreateNewList">
         </activity>
-
         <activity
             android:name=".activities.Add_Items"
             android:label="Add Items"
             android:parentActivityName=".activities.ViewItemLists" />
-        <activity
-            android:name=".activities.CreateNewList"
-            android:exported="true" />
         <activity
             android:name=".activities.AddToDo"
             android:exported="true" />
