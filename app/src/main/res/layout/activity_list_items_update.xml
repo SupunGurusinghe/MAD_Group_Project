@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activities.AddItems">
+
+    <EditText
+        android:id="@+id/item_input2"
+        android:layout_width="192dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="160dp"
+        android:background="@null"
+        android:ems="10"
+        android:fontFamily="@font/ubuntu_bold"
+        android:hint="Item Name"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorTextHint"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/quentity_input2"
+        android:layout_width="194dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="50dp"
+        android:background="@null"
+        android:ems="10"
+        android:fontFamily="@font/ubuntu_bold"
+        android:hint="Quentity"
+        android:inputType="number"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorTextHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_input2" />
+
+
+    <View
+        android:id="@+id/item_name_indicator"
+        android:layout_width="5dp"
+        android:layout_height="23dp"
+        android:background="@drawable/list_backgrount_subtitle_indicator"
+        android:layout_marginStart="87dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_input2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_input2"
+        android:layout_marginLeft="87dp" />
+
+    <View
+        android:id="@+id/item_quntity_indicator"
+        android:layout_width="5dp"
+        android:layout_height="23dp"
+        android:background="@drawable/list_backgrount_subtitle_indicator"
+        android:layout_marginStart="87dp"
+        app:layout_constraintBottom_toBottomOf="@+id/quentity_input2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/quentity_input2"
+        android:layout_marginLeft="87dp" />
+
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="@color/Update_Button"
+        android:text="Update"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/delete_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quentity_input2"
+        android:layout_marginLeft="95dp" />
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="100dp"
+        android:backgroundTint="@color/Update_Button"
+        android:text="DELETE"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quentity_input2"
+        android:layout_marginRight="100dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
