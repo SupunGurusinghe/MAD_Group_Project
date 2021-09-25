@@ -18,7 +18,7 @@ import com.example.a4mation.R;
 
 import java.util.ArrayList;
 
-public class ListCustomAdapter extends RecyclerView.Adapter<ListCustomAdapter.MyViewHolder> {
+public class ListCustomAdapter extends RecyclerView.Adapter<ListCustomAdapter.MyViewHolder>{
 
     private Context context;
     Activity activity;
@@ -26,16 +26,13 @@ public class ListCustomAdapter extends RecyclerView.Adapter<ListCustomAdapter.My
 
     Animation list_translate_anim;
 
-
-
-    ListCustomAdapter(Activity activity, Context context, ArrayList item_id, ArrayList item_name, ArrayList item_quentity){
+    ListCustomAdapter(Activity activity,Context context, ArrayList item_id, ArrayList item_name, ArrayList item_quentity){
         this.activity = activity;
         this.context = context;
         this.item_id = item_id;
         this.item_name = item_name;
         this.item_quentity = item_quentity;
     }
-
 
     @NonNull
     @Override
@@ -51,7 +48,7 @@ public class ListCustomAdapter extends RecyclerView.Adapter<ListCustomAdapter.My
         holder.item_name_txt.setText(String.valueOf(item_name.get(position)));
         holder.item_quentity_txt.setText(String.valueOf(item_quentity.get(position)));
         holder.mainLayout.setOnClickListener(view -> {
-            Intent intent = new Intent(context, ListItemsUpdate.class);
+            Intent intent = new Intent(context, List_Item_Update.class);
             intent.putExtra("id", String.valueOf(item_id.get(position)));
             intent.putExtra("item", String.valueOf(item_name.get(position)));
             intent.putExtra("quantity", String.valueOf(item_quentity.get(position)));

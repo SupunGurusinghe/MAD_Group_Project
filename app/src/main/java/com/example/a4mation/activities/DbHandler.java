@@ -333,10 +333,6 @@ public class DbHandler extends SQLiteOpenHelper {
 
 
 
-
-
-
-
     //sticky notes functions
 
 
@@ -413,6 +409,12 @@ public class DbHandler extends SQLiteOpenHelper {
 
 
 
+
+
+
+
+    // Adding list Items
+
     void addItems(String item_name, int quantity){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -453,7 +455,7 @@ public class DbHandler extends SQLiteOpenHelper {
         }
     }
 
-    // Delete
+    // Delete Items
 
     void deleteOneRow (String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -465,6 +467,7 @@ public class DbHandler extends SQLiteOpenHelper {
         }
     }
 
+    // Delete All Data
     void deleteAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME4);
