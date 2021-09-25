@@ -17,11 +17,25 @@
             android:name=".activities.PasswordMain"
             android:exported="true" />
         <activity
-            android:name=".activities.ViewItems"
-            android:exported="true" />
+            android:name=".activities.ListView"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".activities.CreateNewList"
             android:exported="true" />
+        <activity
+            android:name=".activities.List_Item_Update"
+            android:label="Update Items"
+            android:parentActivityName=".activities.ViewItemLists" />
+        <activity
+            android:name=".activities.ViewItemLists"
+            android:label="Add Items"
+            android:parentActivityName=".activities.CreateNewList">
+        </activity>
+        <activity
+            android:name=".activities.Add_Items"
+            android:label="Add Items"
+            android:parentActivityName=".activities.ViewItemLists" />
         <activity
             android:name=".activities.AddToDo"
             android:exported="true" />
@@ -38,9 +52,6 @@
             android:exported="true"
             android:label="@string/et_stickynote"
             android:parentActivityName=".activities.Home" />
-        <activity
-            android:name=".activities.ListView"
-            android:exported="true" />
         <activity
             android:name=".activities.stkTypeMsg"
             android:exported="true"
