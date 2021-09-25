@@ -2,6 +2,7 @@ package com.example.a4mation.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,15 +19,21 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +47,7 @@ public class stkDisplayEdit extends AppCompatActivity {
     private View eviewstkIndicator;
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
-    private TextView etextWebUrl;
+    private TextView etextWebUrl,tv_ccount;
     private LinearLayout ewebLinearLayout;
     private String eselectedImagePath;
     private AlertDialog edialogAddUrl;
@@ -50,6 +57,9 @@ public class stkDisplayEdit extends AppCompatActivity {
     private ImageView imageset;
     private String id,title,body, timestamp, color, image;
     private AlertDialog dialogDeletestkNote;
+    int eseekValue;
+    private SeekBar esBar;
+
 
 
 
@@ -60,6 +70,42 @@ public class stkDisplayEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stk_display_edit);
+
+
+        // Define ActionBar object
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+
+
+
+// Define ColorDrawable object and parse color
+// using parseColor method
+// with color hash code as its parameter
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#669900"));
+
+
+
+
+
+// Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+
+
+// Change Toolbar text
+        getSupportActionBar().setTitle("");
+// getSupportActionBar().setSubtitle("Main");
+
+
+
+// Change the color of status bar
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorNew));
+        }
         etextWebUrl = findViewById(R.id.eweburl);
         ewebLinearLayout = findViewById(R.id.ell_web);
         Title = findViewById(R.id.eet_tl);
@@ -68,6 +114,25 @@ public class stkDisplayEdit extends AppCompatActivity {
         update = findViewById(R.id.img_o);
         delete = findViewById(R.id.stkdelete);
         eselectedImagePath = "";
+        esBar = findViewById(R.id.esBar);
+        tv_ccount = findViewById(R.id.tv_ccount);
+        esBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                eseekValue= i;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Body.setText(Body.getText().toString());
+                Body.setTextSize(eseekValue);
+            }
+        });
 
         getstkintentdata();
 
@@ -87,9 +152,36 @@ public class stkDisplayEdit extends AppCompatActivity {
 
                   }
         });
+        Body.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                int character = Body.length();
+                int ch1 = Title.length();
+                int total = character + ch1;
+                String convert = String.valueOf(total);
+                tv_ccount.setText(convert);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int character = Body.length();
+                int ch1 = Title.length();
+                int total = character + ch1;
+                String convert = String.valueOf(total);
+                tv_ccount.setText(convert);
 
 
-    eviewstkIndicator = findViewById(R.id.eviewstkIndicator);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
+        eviewstkIndicator = findViewById(R.id.eviewstkIndicator);
     estkColor = "#333333";
     eviewstkIndicatorcolor();
     ImageView eimgCol2 = findViewById(R.id.eimgCol2);
