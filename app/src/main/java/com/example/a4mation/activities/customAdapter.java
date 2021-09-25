@@ -43,6 +43,7 @@ public class customAdapter extends RecyclerView.Adapter<customAdapter.MyViewHold
 
     }
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView ID_txt, Title_txt, Timestamp_txt;
 

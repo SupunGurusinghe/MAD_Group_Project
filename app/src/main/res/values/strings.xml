@@ -92,7 +92,9 @@
     <string name="searchstkinput">search sticky note here</string>
     <string name="tv_dltstk">Delete Sticky note</string>
     <string name="stkDeleteNote">Delete</string>
-    <string name="search_notes">search notes</string>
+    <string name="tv_dltallstk">Delete All</string>
+    <string name="tv_stktext">Are you sure delete all sticky notes?</string>
+
 
 </resources>
 

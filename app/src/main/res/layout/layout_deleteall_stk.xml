@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/stk_dlt_layout"
+    android:id="@+id/stk_dltall_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -23,14 +23,14 @@
         app:tint="@color/colorWhite" />
 
     <TextView
-        android:id="@+id/tv_dltstk"
+        android:id="@+id/tv_dltallstk"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:fontFamily="@font/ubuntu_bold"
         android:includeFontPadding="false"
-        android:text="@string/tv_dltstk"
+        android:text="@string/tv_dltallstk"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="@id/imageDeleteNote"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="@id/imageDeleteNote" />
 
     <TextView
-        android:id="@+id/tv_stknotetext"
+        android:id="@+id/tv_stktext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -48,7 +48,7 @@
         android:includeFontPadding="false"
         android:paddingStart="@dimen/_8sdp"
         android:paddingEnd="@dimen/_8sdp"
-        android:text="@string/asking_delete_permission_msg"
+        android:text="@string/tv_stktext"
         android:textColor="@color/colorWhite"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/imageDeleteNote"
@@ -56,7 +56,7 @@
 
 
     <TextView
-        android:id="@+id/stkDeleteConfirm"
+        android:id="@+id/stkDeleteallConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -73,10 +73,10 @@
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_stknotetext" />
+        app:layout_constraintTop_toBottomOf="@id/tv_stktext" />
 
     <TextView
-        android:id="@+id/stkcancel"
+        android:id="@+id/stkallcancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -92,8 +92,8 @@
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/stkDeleteConfirm"
-        app:layout_constraintTop_toBottomOf="@id/tv_stknotetext" />
+        app:layout_constraintEnd_toStartOf="@id/stkDeleteallConfirm"
+        app:layout_constraintTop_toBottomOf="@id/tv_stktext" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

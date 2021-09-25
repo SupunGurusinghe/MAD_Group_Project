@@ -47,7 +47,7 @@ public class stkDisplayEdit extends AppCompatActivity {
     private View eviewstkIndicator;
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
-    private TextView etextWebUrl,tv_ccount;
+    private TextView etextWebUrl,tv_ccount, tv_wwcount;;
     private LinearLayout ewebLinearLayout;
     private String eselectedImagePath;
     private AlertDialog edialogAddUrl;
@@ -118,6 +118,7 @@ public class stkDisplayEdit extends AppCompatActivity {
         eselectedImagePath = "";
         esBar = findViewById(R.id.esBar);
         tv_ccount = findViewById(R.id.tv_ccount);
+        tv_wwcount = findViewById(R.id.tv_wwcount);
         homeimg = findViewById(R.id.homeimg);
         //init paper
 
@@ -172,6 +173,10 @@ public class stkDisplayEdit extends AppCompatActivity {
                 int total = character + ch1;
                 String convert = String.valueOf(total);
                 tv_ccount.setText(convert);
+                int totalWord = wordcount(Body.getText().toString()) + wordcount(Title.getText().toString());
+                String v = String.valueOf(totalWord);
+                tv_wwcount.setText(v);
+
             }
 
             @Override
@@ -300,6 +305,23 @@ public class stkDisplayEdit extends AppCompatActivity {
 
 
     }
+
+    public static int wordcount(String line) {
+        int numWords = 0;
+        int index = 0;
+        boolean prevWhiteSpace = true;
+        while (index < line.length()) {
+            char c = line.charAt(index++);
+            boolean currWhiteSpace = Character.isWhitespace(c);
+            if (prevWhiteSpace && !currWhiteSpace) {
+                numWords++;
+            }
+            prevWhiteSpace = currWhiteSpace;
+        }
+        return numWords;
+    }
+
+
     void getstkintentdata(){
         if (getIntent().hasExtra("ID") && getIntent().hasExtra("Title") && getIntent().hasExtra("Timestamp")) {
             //getting data from intent
@@ -333,7 +355,7 @@ public class stkDisplayEdit extends AppCompatActivity {
         if (dialogDeletestkNote.getWindow() != null) {
             dialogDeletestkNote.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-        view.findViewById(R.id.stkDeleteNote).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.stkDeleteConfirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DbHandler dbd = new DbHandler(stkDisplayEdit.this);
@@ -342,7 +364,7 @@ public class stkDisplayEdit extends AppCompatActivity {
         });
 
 
-        view.findViewById(R.id.stkCancel).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.stkcancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogDeletestkNote.dismiss();
