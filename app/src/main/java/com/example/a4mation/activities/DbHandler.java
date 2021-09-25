@@ -378,6 +378,7 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
 
+
     void updatestk(String row_id, String Title, String Body, String Color, String Image){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues val = new ContentValues();
@@ -401,6 +402,16 @@ public class DbHandler extends SQLiteOpenHelper {
         else
             Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
     }
+    void deleteAllStk(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME3);
+        Toast.makeText(context,"Deleted", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+
 
     void addItems(String item_name, int quantity){
         SQLiteDatabase db = this.getWritableDatabase();

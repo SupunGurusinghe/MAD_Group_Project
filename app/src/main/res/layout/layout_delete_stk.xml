@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="@id/imageDeleteNote" />
 
     <TextView
-        android:id="@+id/textDeleteNoteMessage"
+        android:id="@+id/tv_stknotetext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -56,7 +56,7 @@
 
 
     <TextView
-        android:id="@+id/stkDeleteNote"
+        android:id="@+id/stkDeleteConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -73,10 +73,10 @@
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDeleteNoteMessage" />
+        app:layout_constraintTop_toBottomOf="@id/tv_stknotetext" />
 
     <TextView
-        android:id="@+id/stkCancel"
+        android:id="@+id/stkcancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -92,8 +92,8 @@
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/stkDeleteNote"
-        app:layout_constraintTop_toBottomOf="@id/textDeleteNoteMessage" />
+        app:layout_constraintEnd_toStartOf="@id/stkDeleteConfirm"
+        app:layout_constraintTop_toBottomOf="@id/tv_stknotetext" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
