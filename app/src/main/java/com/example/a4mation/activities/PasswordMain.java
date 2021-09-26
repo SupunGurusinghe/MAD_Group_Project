@@ -136,42 +136,40 @@ public class PasswordMain extends AppCompatActivity {
     }
 
     //set password dialog
-    public void showSetPasswordDialog(){
+    public void showSetPasswordDialog(){//Display alert
         AlertDialog.Builder builder = new AlertDialog.Builder(PasswordMain.this);
         View view = LayoutInflater.from(this).inflate(
-                R.layout.layout_set_password,
-                (ViewGroup) findViewById(R.id.layoutSetPasswordContainer)
+                R.layout.layout_set_password, //layout name
+                (ViewGroup) findViewById(R.id.layoutSetPasswordContainer) //layout id
         );
         builder.setView(view);
         dialogSetPassword = builder.create();
-        if (dialogSetPassword.getWindow() != null) {
+        if (dialogSetPassword.getWindow() != null) { //check null or not
             dialogSetPassword.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-
+        //catch ids for variables
         inputSetKey = view.findViewById(R.id.inputSetKey);
         inputSecurityQuestion = view.findViewById(R.id.inputSecurityQuestion);
         inputSecurityQuestionAnswer = view.findViewById(R.id.inputSecurityQuestionAnswer);
         inputSecurityQuestionAnswer = view.findViewById(R.id.inputSecurityQuestionAnswer);
-
-
+        //Onclick confirm
         view.findViewById(R.id.textConfirm).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {//Insert part
                 boolean isInserted = myDb.insertSecurity(inputSecurityQuestion.getText().toString(),
                         inputSecurityQuestionAnswer.getText().toString(),
-                        inputSetKey.getText().toString());
-                if(isInserted == true){
+                        inputSetKey.getText().toString());//Insert function execute
+                if(isInserted == true){//Successfully inserted toast
                     Toast.makeText(PasswordMain.this, "Security Question Inserted", Toast.LENGTH_LONG).show();
                     startActivity(
                             new Intent(PasswordMain.this, LockOne.class)
                     );
-                }else{
+                }else{//Unsuccessful toast
                     Toast.makeText(PasswordMain.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
                 }
             }
         });
-
-
+        //Cancel button
         view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

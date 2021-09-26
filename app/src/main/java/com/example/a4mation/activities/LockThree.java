@@ -245,55 +245,53 @@ public class LockThree extends AppCompatActivity {
 
 
         //Update
-        EditText key = findViewById(R.id.key);
+        EditText key = findViewById(R.id.key); //retrieve id value
         okButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 String temppwd = inputPassword.getText().toString();
-
+                //Calculation
                 char[] pwd = temppwd.toCharArray();
-
                 String temp = "";
                 for(char c: pwd) {
                     c += 5;
                     temp = temp + c;
                 }
+                //get intent id
                 String id = getIntent().getStringExtra("id2");
-                boolean isUpdate = myDb.updateLock(id,
+                boolean isUpdate = myDb.updateLock(id, //execute database update function
                         InputPasswordTitle.getText().toString(),
                         temp,
                         selectedNoteColor,
                         inputDescription.getText().toString(),
                         textDateTime.getText().toString());
 
-                if(isUpdate) {
+                if(isUpdate) {//successful update toast
                     Toast.makeText(LockThree.this, "Data Updated", Toast.LENGTH_LONG).show();
                     startActivity(
                             new Intent(LockThree.this, PasswordMain.class)
                     );
-                }else{
+                }else{//unsuccessful update toast
                     Toast.makeText(LockThree.this, "Data Not Updated", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
+    //delete a note
     private void showDeleteNoteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LockThree.this);
         View view = LayoutInflater.from(this).inflate(
-                R.layout.layout_delete_note,
-                (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer)
+                R.layout.layout_delete_note, //delete note layout
+                (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer) //id
         );
         builder.setView(view);
         dialogDeleteNote = builder.create();
-        if (dialogDeleteNote.getWindow() != null) {
+        if (dialogDeleteNote.getWindow() != null) { //display dialog
             dialogDeleteNote.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-
-
-
+        //cancel dialog
         view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -301,18 +299,18 @@ public class LockThree extends AppCompatActivity {
             }
         });
         dialogDeleteNote.show();
-
+        //when confirm clicks take id
         view.findViewById(R.id.textDeleteNote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String id = getIntent().getStringExtra("id2");
-                boolean isTrue = myDb.deleteOneLock(id);
-                if(isTrue){
+                boolean isTrue = myDb.deleteOneLock(id); //database delete function execute
+                if(isTrue){ //success message
                     Toast.makeText(LockThree.this, "Successfully Deleted!", Toast.LENGTH_LONG).show();
                     startActivity(
                             new Intent(LockThree.this, PasswordMain.class)
                     );
-                }else{
+                }else{ //unsuccessful message
                     Toast.makeText(LockThree.this, "Delete Unsuccessful!", Toast.LENGTH_SHORT).show();
                 }
             }

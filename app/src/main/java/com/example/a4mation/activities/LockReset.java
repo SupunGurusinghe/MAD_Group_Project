@@ -73,23 +73,22 @@ public class LockReset extends AppCompatActivity {
         });
 
         //reset key button
-        setKeyButton = findViewById(R.id.setKeyButton);
+        setKeyButton = findViewById(R.id.setKeyButton);//take button id value
         setKeyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isUpdated = myDb.updateSecurityKey(addNewPassword.getText().toString());
-                if(isUpdated == true){
+                boolean isUpdated = myDb.updateSecurityKey(addNewPassword.getText().toString());//execute query
+                if(isUpdated == true){ //Successful update toast
                     Toast.makeText(LockReset.this, "Successfully Inserted", Toast.LENGTH_LONG).show();
                     startActivity(
                             new Intent(LockReset.this, PasswordMain.class)
                     );
-                }else{
+                }else{ //Unsuccessful update toast
                     Toast.makeText(LockReset.this, "Failed to change key", Toast.LENGTH_LONG).show();
                     startActivity(
                             new Intent(LockReset.this, PasswordMain.class)
                     );
                 }
-
             }
         });
     }

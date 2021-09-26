@@ -272,25 +272,25 @@ public class LockOne extends AppCompatActivity {
 
 
 
-    private void showAddUrlDialog() {
+    private void showAddUrlDialog() { //show url dialog
         if (dialogAddUrl == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(LockOne.this);
             View view = LayoutInflater.from(this).inflate(
-                    R.layout.layout_add_url,
-                    (ViewGroup) findViewById(R.id.layoutAddUrlContainer)
+                    R.layout.layout_add_url, //get layout
+                    (ViewGroup) findViewById(R.id.layoutAddUrlContainer) //get layout id
             );
             builder.setView(view);
 
-            dialogAddUrl = builder.create();
+            dialogAddUrl = builder.create(); //display layout
             if (dialogAddUrl.getWindow() != null) {
                 dialogAddUrl.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
             final EditText inputUrl = view.findViewById(R.id.inputUrl);
             inputUrl.requestFocus();
-
+            //get ids
             view.findViewById(R.id.textAdd).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view) { //adding validations
                     if (inputUrl.getText().toString().trim().isEmpty()) {
                         Toast.makeText(LockOne.this, "Enter URL", Toast.LENGTH_SHORT).show();
                     } else if (!Patterns.WEB_URL.matcher(inputUrl.getText().toString()).matches()) {
@@ -302,7 +302,7 @@ public class LockOne extends AppCompatActivity {
                     }
                 }
             });
-
+            //cancel
             view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -319,42 +319,36 @@ public class LockOne extends AppCompatActivity {
 
     //send Data method
     public void sendData(){
+        //Store inputs within string variables
         title = titleEdit.getText().toString().trim();
         password = passwordEdit.getText().toString().trim();
         Url = inputURL.getText().toString().trim();
         description = descriptionEdit.getText().toString().trim();
         key = keyEdit.getText().toString().trim();
         String date = textDateTime2.getText().toString().trim();
-
+        //Retrieving the value of key from database
         String Lockkey = myDb.getSecurityKey();
         if(key.equals(Lockkey)){
-
-            char[] pwd = password.toCharArray();
-
+            char[] pwd = password.toCharArray();  //Calculation
             String temp = "";
             for(char c: pwd) {
                 c += 5;
                 temp = temp + c;
             }
 
-
             //Send to Database
             boolean isInserted = myDb.insertLockData(title, temp, description, date, selectedNoteColor);
-            if(isInserted == true){
+            if(isInserted == true){//Successful tost message
                 Toast.makeText(LockOne.this, "Data Inserted Successfully", Toast.LENGTH_LONG).show();
                 startActivity(
                         new Intent(LockOne.this, PasswordMain.class)
                 );
-
-            }else{
+            }else{//Unsuccessful tost message
                 Toast.makeText(LockOne.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
             }
-
         }else{
             showPasswordIncorrectDialog();
         }
-
-
     }
 
 
@@ -387,36 +381,36 @@ public class LockOne extends AppCompatActivity {
     private void showChangePasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LockOne.this);
         View view = LayoutInflater.from(this).inflate(
-                R.layout.layout_change_password,
-                (ViewGroup) findViewById(R.id.layoutChangePasswordContainer)
+                R.layout.layout_change_password, //layout name
+                (ViewGroup) findViewById(R.id.layoutChangePasswordContainer) //layout id
         );
         builder.setView(view);
         dialogChangePassword = builder.create();
-        if (dialogChangePassword.getWindow() != null) {
+        if (dialogChangePassword.getWindow() != null) { //check null or not
             dialogChangePassword.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-
+        //catch ids for variables
         TextView displaySecurityQuestion = view.findViewById(R.id.displaySecurityQuestion);
-        displaySecurityQuestion.setText(myDb.getSecurityQuestion());
+        displaySecurityQuestion.setText(myDb.getSecurityQuestion());//display password from retrieving database
 
         answerQuestion =  view.findViewById(R.id.answer);
 
         String answer = myDb.getAnswer();
+        //Onclick confirm
         view.findViewById(R.id.textConfirm).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {//Insert part
                 String answerQ = answerQuestion.getText().toString();
-                if(answer.equals(answerQ)){
+                if(answer.equals(answerQ)){//Successfully inserted toast
                     startActivity(
                             new Intent(LockOne.this, LockReset.class)
                     );
-                }else{
+                }else{//Unsuccessful toast
                     Toast.makeText(LockOne.this, "Incorrect Answer "+ answerQ, Toast.LENGTH_LONG).show();
                 }
             }
         });
-
-
+        //Cancel button
         view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
