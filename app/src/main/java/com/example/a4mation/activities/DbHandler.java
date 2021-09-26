@@ -333,9 +333,9 @@ public class DbHandler extends SQLiteOpenHelper {
 
 
 
+
+
     //sticky notes functions
-
-
     public String getDateTime(){
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date;
@@ -343,6 +343,8 @@ public class DbHandler extends SQLiteOpenHelper {
         return dateFormat.format(date);
     }
 
+
+    //insert sticky note data into database including title,body,image,selected color and created date
     public void insertData(String Title, String Body, String Image, String Color) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -352,20 +354,19 @@ public class DbHandler extends SQLiteOpenHelper {
         values.put(C_TIMESTAMP, getDateTime());
         values.put(C_COLOR, Color);
         long result = db.insert(TABLE_NAME3, null, values);
-
+         //display unsuccessful message
         if (result == -1)
             Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(context, "saved", Toast.LENGTH_SHORT).show();
+        //display successful message if no error
     }
 
 
-
+        //read all data from database table
     Cursor readstk(){
-
         String query = "SELECT * FROM " +TABLE_NAME3;
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor cursor = null;
         if (db != null){
             cursor = db.rawQuery(query, null);
@@ -374,7 +375,7 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
 
-
+        //update sticky note table with changes
     void updatestk(String row_id, String Title, String Body, String Color, String Image){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues val = new ContentValues();
@@ -382,14 +383,18 @@ public class DbHandler extends SQLiteOpenHelper {
         val.put(C_BODY, Body);
         val.put(C_COLOR, Color);
         val.put(C_IMAGE, Image);
-        val.put(C_TIMESTAMP, getDateTime());
+        val.put(C_TIMESTAMP, getDateTime());//further adding updated time into database
+        //update values that user changed
         long res = db.update(TABLE_NAME3, val, "ID=?", new String[]{row_id});
         if (res == -1)
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(context, "Successfully updated", Toast.LENGTH_SHORT).show();
+        //display successful message if no error
     }
 
+
+    //delete sticky notes from table using ID
     void deleteonestk(String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
         long re = db.delete(TABLE_NAME3, "ID=?", new String[]{row_id});
@@ -398,6 +403,8 @@ public class DbHandler extends SQLiteOpenHelper {
         else
             Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
     }
+
+    //delete all sticky notes at once
     void deleteAllStk(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME3);
