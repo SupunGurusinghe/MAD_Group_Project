@@ -26,6 +26,7 @@ public class DbHandler extends SQLiteOpenHelper {
     public static final String TABLE2_NAME = "security_table";
     public static final String TABLE_NAME3 = "Sticky_Note_table";
     private static final String TABLE_NAME4 = "adding_items";
+    private static final String TABLE_NAME5 = "list_table";
 
     // Column Names
     private static final String ID = "id";
@@ -34,10 +35,16 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String STARTED = "started";
     private static final String FINISHED = "finished";
 
-    // Column add items
+    // list_table table Columns
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_ITEM_NAME = "item";
     private static final String COLUMN_QUANTITY = "quantity";
+
+
+    // create_list table Columns
+    private static final String COLUMN_lIST_ID = "id";
+    private static final String COLUMN_LIST_TITLE_NAME = "title";
+    private static final String COLUMN_lIST_SUB_NAME = "subtitle";
 
     //Lock_Table columns
     public static final String COL_1 = "ID";
@@ -87,7 +94,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         " (" + C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + C_TITLE + " TEXT, " + C_BODY + " TEXT, " + C_TIMESTAMP + " TEXT, " + C_IMAGE + " TEXT, " + C_COLOR + " TEXT);";
         db.execSQL(query);
 
-
+        // Item Query
         String query2 =
                 "CREATE TABLE " + TABLE_NAME4 +
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -96,7 +103,18 @@ public class DbHandler extends SQLiteOpenHelper {
 
         db.execSQL(query2);
 
+        // List Query
+        String query3 =
+                "CREATE TABLE " + TABLE_NAME5 +
+                        " (" + COLUMN_lIST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_LIST_TITLE_NAME + " TEXT, " +
+                        COLUMN_lIST_SUB_NAME + " TEXT);";
+
+        db.execSQL(query3);
+
     }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -114,9 +132,15 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME3);
         onCreate(db);
 
-        // add item
+
+        // add items
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME4);
         onCreate(db);
+
+        // Create list
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME5);
+        onCreate(db);
+
 
     }
 
@@ -421,7 +445,6 @@ public class DbHandler extends SQLiteOpenHelper {
 
 
     // Adding list Items
-
     void addItems(String item_name, int quantity){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -435,6 +458,7 @@ public class DbHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Added Successfully", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     Cursor readAllData(){
         String query = "SELECT * FROM " + TABLE_NAME4;
@@ -473,11 +497,37 @@ public class DbHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Successfully Deleted",Toast.LENGTH_SHORT).show();
         }
     }
-
     // Delete All Data
     void deleteAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME4);
+    }
+
+    // Create List
+    void createList(String title, String subtitle){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put (COLUMN_LIST_TITLE_NAME, title);
+        cv.put (COLUMN_lIST_SUB_NAME, subtitle);
+
+        long result = db.insert(TABLE_NAME5, null,cv);
+        if(result == -1){
+            Toast.makeText(context,"Failed", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context,"Added Successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    Cursor readData(){
+        String query3 = "SELECT * FROM " + TABLE_NAME5;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query3, null);
+        }
+        return cursor;
     }
 
 }
