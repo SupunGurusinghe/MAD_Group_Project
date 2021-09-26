@@ -118,20 +118,22 @@ public class stkAfterType extends AppCompatActivity {
         Image = new ArrayList<>();
 
 
+
+         //call function within oncreate() to display data as recyclerview
         displaystk();
         cus = new customAdapter(stkAfterType.this, ID, Title, Body, Timestamp, Colorr, Image);
         recyclerView.setAdapter(cus);
         recyclerView.setLayoutManager(new LinearLayoutManager(stkAfterType.this));
-
     }
 
-
+   //display retrieved all sticky notes data
     void displaystk() {
         Cursor cursor = mid.readstk();
         if (cursor.getCount() == 0) {
-
-            Toast.makeText(this, "NO data", Toast.LENGTH_SHORT).show();
+        //display message if there are no data to display
+                Toast.makeText(this, "NO data", Toast.LENGTH_SHORT).show();
         } else {
+        //otherwise display all data records
             while (cursor.moveToNext()) {
                 ID.add(cursor.getString(0));
                 Title.add(cursor.getString(1));
@@ -139,20 +141,20 @@ public class stkAfterType extends AppCompatActivity {
                 Timestamp.add(cursor.getString(3));
                 Image.add(cursor.getString(4));
                 Colorr.add(cursor.getString(5));
-
             }
         }
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.stk_menu, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 
-
+     //delete all data at once if user want (by displaying popup)
     private void showDeletestkNoteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(stkAfterType.this);
         View view = LayoutInflater.from(this).inflate(
@@ -173,8 +175,6 @@ public class stkAfterType extends AppCompatActivity {
                 startActivity(new Intent(stkAfterType.this, stkAfterType.class));
             }
         });
-
-
         view.findViewById(R.id.stkallcancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,6 +183,7 @@ public class stkAfterType extends AppCompatActivity {
         });
         dialogDeletestkNote.show();
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){

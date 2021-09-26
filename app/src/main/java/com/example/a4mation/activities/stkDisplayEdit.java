@@ -147,52 +147,51 @@ public class stkDisplayEdit extends AppCompatActivity {
             }
         });
 
+        //calling function to get data through intent
         getstkintentdata();
-
+        //onclick for data updating
         update.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 DbHandler dbm = new DbHandler(stkDisplayEdit.this);
+                //call update function
                 dbm.updatestk(id, Title.getText().toString().trim(), Body.getText().toString().trim(), estkColor, eselectedImagePath);
             }
         });
+
+
         delete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 showDeletestkNoteDialog();
-
                   }
         });
+
+       //function to calculate character count of edit texts (note title & note body)
         Body.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                int character = Body.length();
-                int ch1 = Title.length();
-                int total = character + ch1;
-                String convert = String.valueOf(total);
-                tv_ccount.setText(convert);
+                int character = Body.length();//getting length of edit text(body)
+                int ch1 = Title.length();//getting length of edit text(title)
+                int total = character + ch1;//get total
+                String convert = String.valueOf(total);//convert total into sting value
+                tv_ccount.setText(convert);//assign string value into text view
                 int totalWord = wordcount(Body.getText().toString()) + wordcount(Title.getText().toString());
-                String v = String.valueOf(totalWord);
-                tv_wwcount.setText(v);
-
+                      //call word count function and get total(body & title)
+                String v = String.valueOf(totalWord);//convert into string value
+                tv_wwcount.setText(v);//assign string value into text view
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                int character = Body.length();
+                int character = Body.length();//done same thing when text change
                 int ch1 = Title.length();
                 int total = character + ch1;
                 String convert = String.valueOf(total);
                 tv_ccount.setText(convert);
-
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -298,14 +297,12 @@ public class stkDisplayEdit extends AppCompatActivity {
                 } else {
                     selectImage();
                 }
-
             }
         });
-
-
-
     }
 
+
+//function to calculate word count of edit texts (note title & note body)
     public static int wordcount(String line) {
         int numWords = 0;
         int index = 0;
@@ -322,9 +319,11 @@ public class stkDisplayEdit extends AppCompatActivity {
     }
 
 
+
+         //get earlier inserted data that to be updated through intent
     void getstkintentdata(){
         if (getIntent().hasExtra("ID") && getIntent().hasExtra("Title") && getIntent().hasExtra("Timestamp")) {
-            //getting data from intent
+                  //getting data from intent and assign to strings
             id = getIntent().getStringExtra("ID");
             title = getIntent().getStringExtra("Title");
             timestamp = getIntent().getStringExtra("Timestamp");
@@ -332,18 +331,18 @@ public class stkDisplayEdit extends AppCompatActivity {
             estkColor = getIntent().getStringExtra("Color");
             image = getIntent().getStringExtra("Image");
 
-            //setting intent data
+                 //setting intent data to edit texts
             Title.setText(title);
             Body.setText(body);
-
-
-
         } else {
+            //display no data message if there are no data
             Toast.makeText(this, "Nodata",Toast.LENGTH_SHORT).show();
         }
-
     }
 
+
+
+   //delete selected sticky note (using popup)
     private void showDeletestkNoteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(stkDisplayEdit.this);
         View view = LayoutInflater.from(this).inflate(
@@ -362,8 +361,6 @@ public class stkDisplayEdit extends AppCompatActivity {
                 dbd.deleteonestk(id);
             }
         });
-
-
         view.findViewById(R.id.stkcancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

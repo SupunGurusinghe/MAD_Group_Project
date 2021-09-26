@@ -158,13 +158,18 @@ public class stkTypeMsg extends AppCompatActivity {
             }
         });
 
+
+
+         //onclick for data insertion
         imgOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DbHandler mdb = new DbHandler(stkTypeMsg.this);
+                //call function for data insertion
                 mdb.insertData(etitle.getText().toString().trim(), ebody.getText().toString().trim(),selectedImagePath, stkColor);
             }
         });
+
 
 
         stkColor = "#333333";
@@ -174,7 +179,6 @@ public class stkTypeMsg extends AppCompatActivity {
         ImageView imgCol3 = findViewById(R.id.imgCol3);
         ImageView imgCol4 = findViewById(R.id.imgCol4);
         ImageView imgCol5 = findViewById(R.id.imgCol5);
-
         View v1 = findViewById(R.id.viewCol1);
         v1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,7 +192,6 @@ public class stkTypeMsg extends AppCompatActivity {
                 viewstkIndicatorcolor();
             }
         });
-
         View v2 = findViewById(R.id.viewCol2);
         v2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,7 +205,6 @@ public class stkTypeMsg extends AppCompatActivity {
                 viewstkIndicatorcolor();
             }
         });
-
         View v3 = findViewById(R.id.viewCol3);
         v3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +244,6 @@ public class stkTypeMsg extends AppCompatActivity {
                 viewstkIndicatorcolor();
             }
         });
-
         // add url dialog layout popup
         LinearLayout link = findViewById(R.id.uadding);
         link.setOnClickListener(new View.OnClickListener() {
@@ -266,11 +267,8 @@ public class stkTypeMsg extends AppCompatActivity {
                 } else {
                     selectImage();
                 }
-
             }
         });
-
-
     }
     public static int wordcount(String line) {
         int numWords = 0;
