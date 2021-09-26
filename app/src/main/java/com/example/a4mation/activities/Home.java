@@ -11,7 +11,7 @@ import com.example.a4mation.R;
 
 public class Home extends AppCompatActivity {
 
-    private LinearLayout layoutPasswordMain,layoutTodoHome,layoutStk;
+    private LinearLayout layoutPasswordMain,layoutTodoHome,layoutStk, listlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,16 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(
                         new Intent(Home.this, stkWelcomePage.class)
+                );
+            }
+        });
+
+        listlayout = findViewById(R.id.listlayout);
+        listlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(
+                        new Intent(Home.this, ListView.class)
                 );
             }
         });
