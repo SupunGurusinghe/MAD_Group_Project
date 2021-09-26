@@ -94,7 +94,7 @@
     <string name="stkDeleteNote">Delete</string>
     <string name="tv_dltallstk">Delete All</string>
     <string name="tv_stktext">Are you sure delete all sticky notes?</string>
-    <string name="search_notes">search_notes</string>
+    <string name="search_notes">search list</string>
 
 
 </resources>
