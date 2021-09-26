@@ -17,7 +17,7 @@
     <string name="encrypt">Encrypt</string>
     <string name="pick_color">Pick Color</string>
     <string name="add_url">Add URL</string>
-    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password">Forgot Key</string>
     <string name="typed_description">Description</string>
     <string name="decrypt">Decrypt</string>
     <string name="done">Done</string>
