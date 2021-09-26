@@ -196,7 +196,6 @@ public class stkDisplayEdit extends AppCompatActivity {
         });
 
 
-
         eviewstkIndicator = findViewById(R.id.eviewstkIndicator);
     estkColor = "#333333";
     eviewstkIndicatorcolor();

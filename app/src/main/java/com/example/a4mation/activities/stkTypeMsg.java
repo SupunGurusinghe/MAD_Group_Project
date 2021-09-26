@@ -111,7 +111,10 @@ public class stkTypeMsg extends AppCompatActivity {
         selectedImagePath = "";
         tv_count = findViewById(R.id.tv_ccount);
         tv_wcount = findViewById(R.id.tv_wcount);
+
+        //catch seekbar from id
         sBar = findViewById(R.id.sBar);
+        //change the font size of sticky note by using seek bar
         sBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -125,7 +128,7 @@ public class stkTypeMsg extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                ebody.setText(ebody.getText().toString());
+                ebody.setText(ebody.getText().toString());//change font size after stopped touch
                 ebody.setTextSize(seekValue);
             }
         });
@@ -172,7 +175,7 @@ public class stkTypeMsg extends AppCompatActivity {
 
 
 
-        stkColor = "#333333";
+        stkColor = "#333333";//default color
         viewstkIndicatorcolor();
         ImageView imgCol2 = findViewById(R.id.imgCol2);
         ImageView imgCol1 = findViewById(R.id.imgCol1);
@@ -183,7 +186,7 @@ public class stkTypeMsg extends AppCompatActivity {
         v1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stkColor = "#333333";
+                stkColor = "#333333";//default selected color
                 imgCol1.setImageResource(R.drawable.ic_done);
                 imgCol2.setImageResource(0);
                 imgCol3.setImageResource(0);
@@ -192,6 +195,7 @@ public class stkTypeMsg extends AppCompatActivity {
                 viewstkIndicatorcolor();
             }
         });
+        // if yellow color round selected
         View v2 = findViewById(R.id.viewCol2);
         v2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,6 +209,7 @@ public class stkTypeMsg extends AppCompatActivity {
                 viewstkIndicatorcolor();
             }
         });
+        // if red color round selected
         View v3 = findViewById(R.id.viewCol3);
         v3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,6 +223,7 @@ public class stkTypeMsg extends AppCompatActivity {
                 viewstkIndicatorcolor();
             }
         });
+        // if blue color round selected
         View v4 = findViewById(R.id.viewCol4);
         v4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,6 +237,7 @@ public class stkTypeMsg extends AppCompatActivity {
                 viewstkIndicatorcolor();
             }
         });
+        // if black color round selected
         View v5 = findViewById(R.id.viewCol5);
         v5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,7 +251,10 @@ public class stkTypeMsg extends AppCompatActivity {
                 viewstkIndicatorcolor();
             }
         });
-        // add url dialog layout popup
+
+
+
+        // adding url (popup)
         LinearLayout link = findViewById(R.id.uadding);
         link.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,11 +262,16 @@ public class stkTypeMsg extends AppCompatActivity {
                 showAddUrlDialogbox();
             }
         });
+
+
+        //catch image adding layout
         LinearLayout imageAdd = findViewById(R.id.pAdding);
         imgStk = findViewById(R.id.imgStk);
+        //if clicked to add image for sticky note
         imageAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //asking permission to access external storage
                 if (ContextCompat.checkSelfPermission(
                         getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE
                 ) != PackageManager.PERMISSION_GRANTED) {
@@ -264,12 +279,14 @@ public class stkTypeMsg extends AppCompatActivity {
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             REQUEST_CODE_STORAGE_PERMISSION
                     );
-                } else {
+                } else {//if permission get
                     selectImage();
                 }
             }
         });
     }
+
+
     public static int wordcount(String line) {
         int numWords = 0;
         int index = 0;
@@ -286,17 +303,13 @@ public class stkTypeMsg extends AppCompatActivity {
     }
 
 
-
+    //If permission granted then add image
     private void selectImage() {
-
-
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE);
         }
     }
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -316,7 +329,6 @@ public class stkTypeMsg extends AppCompatActivity {
             if(data != null){
                 selectedImageUri = data.getData();
                 if(selectedImageUri != null){
-
                     try{
                         InputStream inputstream = getContentResolver().openInputStream(selectedImageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputstream);
@@ -333,7 +345,10 @@ public class stkTypeMsg extends AppCompatActivity {
         }
 
     }
-private String getPathFormUri(Uri contenturi){
+
+
+    //getting image path (for insert image to database)
+    private String getPathFormUri(Uri contenturi){
 
         String filepath;
         Cursor cursor = getContentResolver().query(contenturi, null, null, null, null);
@@ -351,43 +366,46 @@ private String getPathFormUri(Uri contenturi){
         }
 
 
-
+     //adding URL (popup dialog)
     private void showAddUrlDialogbox() {
         if (dialogAddUrl == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(stkTypeMsg.this);
             View view = LayoutInflater.from(this).inflate(
-                    R.layout.stk_link_popup,
+                    R.layout.stk_link_popup,//give layout name for popup
                     (ViewGroup) findViewById(R.id.layoutAddUrlContainer)
             );
             builder.setView(view);
-
             dialogAddUrl = builder.create();
             if (dialogAddUrl.getWindow() != null) {
                 dialogAddUrl.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
-            final EditText inputUrl = view.findViewById(R.id.et_inputurl);
+            final EditText inputUrl = view.findViewById(R.id.et_inputurl);//catch the url
             inputUrl.requestFocus();
-
+            //if clicked confirm button
             view.findViewById(R.id.et_confirm).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //check whether URL is empty
                     if (inputUrl.getText().toString().trim().isEmpty()) {
+                     //display error message to enter an url
                         Toast.makeText(stkTypeMsg.this, "Enter URL", Toast.LENGTH_SHORT).show();
+                     //check whether URL is a valid URL
                     } else if (!Patterns.WEB_URL.matcher(inputUrl.getText().toString()).matches()) {
+                        //display error message to enter valid url
                         Toast.makeText(stkTypeMsg.this, "Enter valid URL", Toast.LENGTH_SHORT).show();
                     } else {
+                        //otherwise it assign to a text view
                         textWebUrl.setText(inputUrl.getText().toString());
                         webLinearLayout.setVisibility(View.VISIBLE);
-                        dialogAddUrl.dismiss();
+                        dialogAddUrl.dismiss();//popup disappear
                     }
                 }
-            });
-
+            });//if user wants to cancel adding URL
             view.findViewById(R.id.et_cancel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dialogAddUrl.dismiss();
-                }
+                }//popup disappear
             });
         }
         dialogAddUrl.show();
