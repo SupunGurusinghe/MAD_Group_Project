@@ -32,6 +32,7 @@ public class ListCustomAdapter extends RecyclerView.Adapter<ListCustomAdapter.My
         this.item_id = item_id;
         this.item_name = item_name;
         this.item_quentity = item_quentity;
+
     }
 
     @NonNull

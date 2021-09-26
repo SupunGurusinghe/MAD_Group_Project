@@ -14,10 +14,16 @@
         <activity
             android:name=".activities.ListView"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.CreateNewList"
-            android:exported="true" />
+            android:label="List"
+            android:parentActivityName=".activities.ViewItemLists"/>
         <activity
             android:name=".activities.List_Item_Update"
             android:label="Update Items"

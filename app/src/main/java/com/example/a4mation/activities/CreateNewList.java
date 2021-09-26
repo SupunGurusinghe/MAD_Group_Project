@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.a4mation.R;
@@ -19,13 +20,24 @@ import com.example.a4mation.R;
 public class CreateNewList extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD_NOTE = 1;
+    EditText inputNoteTitle,inputNoteSubtitle;
+    ImageView imageSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_list);
 
-
+        inputNoteTitle = findViewById(R.id.inputNoteTitle);
+        inputNoteSubtitle = findViewById(R.id.inputNoteSubtitle);
+        imageSave = findViewById(R.id.imageSave);
+        imageSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbHandler myDB = new DbHandler(CreateNewList.this);
+                myDB.createList(inputNoteTitle.getText().toString().trim(),inputNoteSubtitle.getText().toString().trim());
+            }
+        });
 
         // Define ActionBar object
         ActionBar actionBar;
@@ -59,7 +71,6 @@ public class CreateNewList extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.listItemStatusBar));
         }
-
 
 
         ImageView imageBack = findViewById(R.id.imageBack);
