@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".activities.EditTodo">
 
     <TextView
@@ -40,7 +41,7 @@
         android:id="@+id/imageView2"
         android:layout_width="177dp"
         android:layout_height="163dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -68,8 +69,8 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="Title :"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="#FBFBFB"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editToDOTextTitle"
@@ -78,6 +79,7 @@
                 android:ems="10"
                 android:gravity="center_vertical"
                 android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="217dp" />
@@ -97,6 +99,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="Description : "
+                android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -107,6 +110,7 @@
                 android:ems="10"
                 android:gravity="center_vertical"
                 android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="217dp" />
