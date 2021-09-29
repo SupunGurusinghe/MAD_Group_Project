@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,10 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a4mation.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 
-public class LockAdapter extends RecyclerView.Adapter<LockAdapter.MyLockViewHolder>{
+public class LockAdapter extends RecyclerView.Adapter<LockAdapter.MyLockViewHolder> implements Filterable {
     private Context context;
     private ArrayList id, title, password, datetime, color, description;
+    List<String> searchByName;
 
     public LockAdapter(Context context, ArrayList<String> id, ArrayList<String> title, ArrayList<String> password, ArrayList<String> datetime, ArrayList<String> color, ArrayList<String> description) {
         this.context = context;
@@ -28,6 +34,7 @@ public class LockAdapter extends RecyclerView.Adapter<LockAdapter.MyLockViewHold
         this.datetime = datetime;
         this.color = color;
         this.description = description;
+        this.searchByName = new ArrayList<>(title);
     }
 
     @NonNull
@@ -57,10 +64,47 @@ public class LockAdapter extends RecyclerView.Adapter<LockAdapter.MyLockViewHold
         });
     }
 
+
+
+
     @Override
     public int getItemCount() {
         return title.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return titleFilter;
+    }
+
+    private Filter titleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<String> filteredList = new ArrayList<>();
+
+            if (charSequence.toString().isEmpty()){
+                filteredList.addAll(searchByName);
+            }else {
+                for (String title: searchByName){
+                    if (title.toLowerCase().contains(charSequence.toString().toLowerCase())){
+                        filteredList.add(title);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            title.clear();
+            title.addAll((Collection<? extends String>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class MyLockViewHolder extends RecyclerView.ViewHolder {
         TextView textID, textTitle, textDateTime;

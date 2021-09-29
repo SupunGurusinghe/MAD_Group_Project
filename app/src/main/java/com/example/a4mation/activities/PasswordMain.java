@@ -34,14 +34,14 @@ public class PasswordMain extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD_PASSWORD = 1;
 
-    private ImageView imageBack;
+    private ImageView imageBack, search;
 
     //dialog boxes
     private AlertDialog dialogSetPassword;
     private AlertDialog dialogSetSecurityQuestion;
 
     //input field ids catching variables
-    EditText inputSetKey, inputSecurityQuestion, inputSecurityQuestionAnswer;
+    EditText inputSetKey, inputSecurityQuestion, inputSecurityQuestionAnswer, inputSearch;
     ImageView addPasswordMain;
 
     @Override
@@ -116,6 +116,16 @@ public class PasswordMain extends AppCompatActivity {
                 startActivity(
                         new Intent(PasswordMain.this, Home.class)
                 );
+            }
+        });
+
+        //search function
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
+        search = (ImageView) findViewById(R.id.search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lockAdapter.getFilter().filter(inputSearch.getText().toString());
             }
         });
     }
