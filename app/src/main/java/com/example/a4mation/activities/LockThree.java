@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -29,36 +30,37 @@ import java.util.Date;
 import java.util.Locale;
 
 public class LockThree extends AppCompatActivity {
+    DbHandler myDb;
+    Button okButton;
 
+    private EditText InputPasswordTitle, inputPassword, inputDescription;
     private ImageView imageBack;
     private ImageView imageNote;
     private Button encryptButton;
     private TextView textDateTime;
     private TextView textWebUrl;
     private LinearLayout layoutWebUrl;
-    private TextView title, password, url, description;
 
     private LinearLayout layoutForgotPassword;
-
-    public static final String TITLE2 = "Title";
-    public static final String PASSWORD2 = "Password";
-    public static final String DESCRIPTION2 = "Description";
-    public static final String URL2 = "WWW.GOOGLE.COM";
 
     private String passwordTitle, passwordPassword, passwordUrl, passwordDescription;
     private String selectedImagePath;
 
+    //Alert message boxes
     private AlertDialog dialogDeleteNote;
     private AlertDialog dialogAddUrl;
     private AlertDialog dialogIncorrectPassword;
     private AlertDialog dialogChangePassword;
+
+    //color changing
+    private String selectedNoteColor;
+    private View viewPasswordIndicator;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_three);
-
 
         // Define ActionBar object
         ActionBar actionBar;
@@ -85,23 +87,19 @@ public class LockThree extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatusBar));
         }
 
+        //Database creation
+        myDb = new DbHandler(this);
 
-        title = findViewById(R.id.InputPasswordTitle);
-        password = findViewById(R.id.inputPassword);
-        url = findViewById(R.id.textWebUrl);
-        description = findViewById(R.id.inputDescription);
+        InputPasswordTitle = (EditText) findViewById(R.id.InputPasswordTitle);
+        inputPassword = (EditText) findViewById(R.id.inputPassword);
+        inputDescription = (EditText) findViewById(R.id.inputDescription);
+        textDateTime = findViewById(R.id.textDateTime);
 
-        Intent i = getIntent();
-        passwordTitle = i.getStringExtra(TITLE2);
-        passwordPassword = i.getStringExtra(PASSWORD2);
-        passwordUrl = i.getStringExtra(URL2);
-        passwordDescription = i.getStringExtra(DESCRIPTION2);
+        //call the function to display
+        getIntentData2();
 
-        title.setText(passwordTitle);
-        password.setText(passwordPassword);
-        url.setText(passwordUrl);
-        description.setText(passwordDescription);
-
+        //Update part
+        okButton = (Button)findViewById(R.id.okButton);
 
 
         //delete note dialog box popup
@@ -113,7 +111,12 @@ public class LockThree extends AppCompatActivity {
             }
         });
 
+        //update current date and time
+        textDateTime.setText(
+                new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
+                        .format(new Date())
 
+        );
 
         ImageView imageBack = findViewById(R.id.imageBack);
         imageBack.setOnClickListener(new View.OnClickListener() {
@@ -123,30 +126,6 @@ public class LockThree extends AppCompatActivity {
             }
         });
 
-        Button okButton = findViewById(R.id.okButton);
-        EditText key = findViewById(R.id.key);
-        okButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                String tempKey = key.getText().toString().trim();
-                if(tempKey.equals(LockOne.defaultKey)){
-                    startActivity(
-                            new Intent(LockThree.this, LockMain.class)
-                    );
-                }else{
-                    showPasswordIncorrectDialog();
-                }
-            }
-        });
-
-        TextView textDateTime = findViewById(R.id.textDateTime);
-
-        textDateTime.setText(
-                new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
-                        .format(new Date())
-
-        );
 
         //change password
         layoutForgotPassword = findViewById(R.id.layoutForgotPassword);
@@ -185,23 +164,134 @@ public class LockThree extends AppCompatActivity {
 
             }
         });
+
+        //default note color
+        selectedNoteColor = "#333333";
+        viewPasswordIndicator = findViewById(R.id.viewPasswordIndicator);
+
+        ImageView imageColor1 = findViewById(R.id.imageColor1);
+        ImageView imageColor2 = findViewById(R.id.imageColor2);
+        ImageView imageColor3 = findViewById(R.id.imageColor3);
+        ImageView imageColor4 = findViewById(R.id.imageColor4);
+        ImageView imageColor5 = findViewById(R.id.imageColor5);
+
+        View v1 = findViewById(R.id.viewColor1);
+        v1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#333333";
+                imageColor1.setImageResource(R.drawable.ic_done);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }
+        });
+
+        View v2 = findViewById(R.id.viewColor2);
+        v2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#FDBE3B";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(R.drawable.ic_done);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }
+        });
+
+        View v3 = findViewById(R.id.viewColor3);
+        v3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#FF4842";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(R.drawable.ic_done);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }
+        });
+        View v4 = findViewById(R.id.viewColor4);
+        v4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#3A52Fc";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(R.drawable.ic_done);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }
+        });
+        View v5 = findViewById(R.id.viewColor5);
+        v5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#000000";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(R.drawable.ic_done);
+                setPasswordIndicatorColor();
+            }
+        });
+
+
+        //Update
+        EditText key = findViewById(R.id.key); //retrieve id value
+        okButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String temppwd = inputPassword.getText().toString();
+                //Calculation
+                char[] pwd = temppwd.toCharArray();
+                String temp = "";
+                for(char c: pwd) {
+                    c += 5;
+                    temp = temp + c;
+                }
+                //get intent id
+                String id = getIntent().getStringExtra("id2");
+                boolean isUpdate = myDb.updateLock(id, //execute database update function
+                        InputPasswordTitle.getText().toString(),
+                        temp,
+                        selectedNoteColor,
+                        inputDescription.getText().toString(),
+                        textDateTime.getText().toString());
+
+                if(isUpdate) {//successful update toast
+                    Toast.makeText(LockThree.this, "Data Updated", Toast.LENGTH_LONG).show();
+                    startActivity(
+                            new Intent(LockThree.this, PasswordMain.class)
+                    );
+                }else{//unsuccessful update toast
+                    Toast.makeText(LockThree.this, "Data Not Updated", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
-
+    //delete a note
     private void showDeleteNoteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LockThree.this);
         View view = LayoutInflater.from(this).inflate(
-                R.layout.layout_delete_note,
-                (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer)
+                R.layout.layout_delete_note, //delete note layout
+                (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer) //id
         );
         builder.setView(view);
         dialogDeleteNote = builder.create();
-        if (dialogDeleteNote.getWindow() != null) {
+        if (dialogDeleteNote.getWindow() != null) { //display dialog
             dialogDeleteNote.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-
-
-
+        //cancel dialog
         view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -209,6 +299,22 @@ public class LockThree extends AppCompatActivity {
             }
         });
         dialogDeleteNote.show();
+        //when confirm clicks take id
+        view.findViewById(R.id.textDeleteNote).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = getIntent().getStringExtra("id2");
+                boolean isTrue = myDb.deleteOneLock(id); //database delete function execute
+                if(isTrue){ //success message
+                    Toast.makeText(LockThree.this, "Successfully Deleted!", Toast.LENGTH_LONG).show();
+                    startActivity(
+                            new Intent(LockThree.this, PasswordMain.class)
+                    );
+                }else{ //unsuccessful message
+                    Toast.makeText(LockThree.this, "Delete Unsuccessful!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
@@ -299,6 +405,7 @@ public class LockThree extends AppCompatActivity {
         }
 
 
+
         view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -307,4 +414,88 @@ public class LockThree extends AppCompatActivity {
         });
         dialogChangePassword.show();
     }
+
+    void getIntentData2(){
+        if(getIntent().hasExtra("id2")){
+            String id = getIntent().getStringExtra("id2");
+            String title = getIntent().getStringExtra("title2");
+            String datetime = getIntent().getStringExtra("datetime2");
+            String color = getIntent().getStringExtra("color2");
+            String tempPassword = myDb.getPassword(id);
+            String tempDescription = myDb.getDescription(id);
+
+            char[] pwd = tempPassword.toCharArray();
+            String temp = "";
+            for(char c: pwd) {
+                c -= 5;
+                temp = temp + c;
+            }
+
+            //change color
+            viewPasswordIndicator = findViewById(R.id.viewPasswordIndicator);
+            ImageView imageColor1 = findViewById(R.id.imageColor1);
+            ImageView imageColor2 = findViewById(R.id.imageColor2);
+            ImageView imageColor3 = findViewById(R.id.imageColor3);
+            ImageView imageColor4 = findViewById(R.id.imageColor4);
+            ImageView imageColor5 = findViewById(R.id.imageColor5);
+
+            //selecting condition
+            if(color.equals("#333333")){
+                selectedNoteColor = "#333333";
+                imageColor1.setImageResource(R.drawable.ic_done);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }else if(color.equals("#FDBE3B")){
+                selectedNoteColor = "#FDBE3B";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(R.drawable.ic_done);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }else if(color.equals("#FF4842")){
+                selectedNoteColor = "#FF4842";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(R.drawable.ic_done);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }else if(color.equals("#3A52Fc")){
+                selectedNoteColor = "#3A52Fc";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(R.drawable.ic_done);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }else if(color.equals("#000000")){
+                selectedNoteColor = "#000000";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(R.drawable.ic_done);
+                setPasswordIndicatorColor();
+            }
+
+            //set values for fields
+            InputPasswordTitle.setText(title);
+            inputPassword.setText(temp);
+            inputDescription.setText(tempDescription);
+        }else{
+            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    //Change color
+    private void setPasswordIndicatorColor(){
+        GradientDrawable gradientDrawable = (GradientDrawable) viewPasswordIndicator.getBackground();
+        gradientDrawable.setColor(Color.parseColor(selectedNoteColor));
+    }
+
 }

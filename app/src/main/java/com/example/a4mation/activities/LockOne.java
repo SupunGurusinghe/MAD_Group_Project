@@ -7,8 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +27,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a4mation.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class LockOne extends AppCompatActivity {
+    // Database Object Declaration
+    DbHandler myDb;
 
     //Default Key
     public static String defaultKey = "abc";
     String temp = "";
 
-    //declarations
+
+
+
     private ImageView imageBack;
     private ImageView imageNote;
     private Button encryptButton;
@@ -53,7 +62,10 @@ public class LockOne extends AppCompatActivity {
     private AlertDialog dialogAddUrl;
     private AlertDialog dialogIncorrectPassword;
     private AlertDialog dialogChangePassword;
-
+    private EditText answerQuestion;
+    private EditText textDateTime2;
+    private String selectedNoteColor;
+    private View viewPasswordIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +97,10 @@ public class LockOne extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatusBar));
         }
 
+        //Database creation
+        myDb = new DbHandler(this);
+
+
         imageBack = findViewById(R.id.imageBack);
         encryptButton = findViewById(R.id.encryptButton);
         textDateTime = findViewById(R.id.textDateTime);
@@ -109,9 +125,6 @@ public class LockOne extends AppCompatActivity {
 
         );
 
-
-
-
         //get inputs
         mButton = (Button) findViewById(R.id.encryptButton);
         titleEdit = (EditText) findViewById(R.id.InputPasswordTitle);
@@ -119,6 +132,9 @@ public class LockOne extends AppCompatActivity {
         descriptionEdit = (EditText) findViewById(R.id.inputDescription);
         keyEdit = (EditText) findViewById(R.id.key);
         inputURL = (TextView) findViewById(R.id.textWebUrl);
+        encryptButton = (Button)findViewById(R.id.encryptButton);
+        textDateTime2 = (EditText) findViewById(R.id.textDateTime);
+
 
         mButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -128,7 +144,6 @@ public class LockOne extends AppCompatActivity {
                     }
                 }
         );
-
 
 
 
@@ -142,8 +157,6 @@ public class LockOne extends AppCompatActivity {
         });
 
 
-
-
         findViewById(R.id.imageRemoveWebUrl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,9 +164,6 @@ public class LockOne extends AppCompatActivity {
                 layoutWebUrl.setVisibility(View.GONE);
             }
         });
-
-
-
 
         findViewById(R.id.imageRemoveImage).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,8 +177,6 @@ public class LockOne extends AppCompatActivity {
         });
 
 
-
-
         //change password
         layoutForgotPassword = findViewById(R.id.layoutForgotPassword);
         layoutForgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -177,28 +185,112 @@ public class LockOne extends AppCompatActivity {
                 showChangePasswordDialog();
             }
         });
+
+
+        //default note color
+        selectedNoteColor = "#333333";
+        viewPasswordIndicator = findViewById(R.id.viewPasswordIndicator);
+
+        ImageView imageColor1 = findViewById(R.id.imageColor1);
+        ImageView imageColor2 = findViewById(R.id.imageColor2);
+        ImageView imageColor3 = findViewById(R.id.imageColor3);
+        ImageView imageColor4 = findViewById(R.id.imageColor4);
+        ImageView imageColor5 = findViewById(R.id.imageColor5);
+
+        View v1 = findViewById(R.id.viewColor1);
+        v1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#333333";
+                imageColor1.setImageResource(R.drawable.ic_done);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }
+        });
+
+        View v2 = findViewById(R.id.viewColor2);
+        v2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#FDBE3B";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(R.drawable.ic_done);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }
+        });
+
+        View v3 = findViewById(R.id.viewColor3);
+        v3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#FF4842";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(R.drawable.ic_done);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }
+        });
+        View v4 = findViewById(R.id.viewColor4);
+        v4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#3A52Fc";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(R.drawable.ic_done);
+                imageColor5.setImageResource(0);
+                setPasswordIndicatorColor();
+            }
+        });
+        View v5 = findViewById(R.id.viewColor5);
+        v5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNoteColor = "#000000";
+                imageColor1.setImageResource(0);
+                imageColor2.setImageResource(0);
+                imageColor3.setImageResource(0);
+                imageColor4.setImageResource(0);
+                imageColor5.setImageResource(R.drawable.ic_done);
+                setPasswordIndicatorColor();
+            }
+        });
+
     }
 
 
-    private void showAddUrlDialog() {
+
+
+
+
+    private void showAddUrlDialog() { //show url dialog
         if (dialogAddUrl == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(LockOne.this);
             View view = LayoutInflater.from(this).inflate(
-                    R.layout.layout_add_url,
-                    (ViewGroup) findViewById(R.id.layoutAddUrlContainer)
+                    R.layout.layout_add_url, //get layout
+                    (ViewGroup) findViewById(R.id.layoutAddUrlContainer) //get layout id
             );
             builder.setView(view);
 
-            dialogAddUrl = builder.create();
+            dialogAddUrl = builder.create(); //display layout
             if (dialogAddUrl.getWindow() != null) {
                 dialogAddUrl.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
             final EditText inputUrl = view.findViewById(R.id.inputUrl);
             inputUrl.requestFocus();
-
+            //get ids
             view.findViewById(R.id.textAdd).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view) { //adding validations
                     if (inputUrl.getText().toString().trim().isEmpty()) {
                         Toast.makeText(LockOne.this, "Enter URL", Toast.LENGTH_SHORT).show();
                     } else if (!Patterns.WEB_URL.matcher(inputUrl.getText().toString()).matches()) {
@@ -210,7 +302,7 @@ public class LockOne extends AppCompatActivity {
                     }
                 }
             });
-
+            //cancel
             view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -227,35 +319,36 @@ public class LockOne extends AppCompatActivity {
 
     //send Data method
     public void sendData(){
+        //Store inputs within string variables
         title = titleEdit.getText().toString().trim();
         password = passwordEdit.getText().toString().trim();
         Url = inputURL.getText().toString().trim();
         description = descriptionEdit.getText().toString().trim();
         key = keyEdit.getText().toString().trim();
-
-        if(key.equals(defaultKey)){
-
-            char[] pwd = password.toCharArray();
-
+        String date = textDateTime2.getText().toString().trim();
+        //Retrieving the value of key from database
+        String Lockkey = myDb.getSecurityKey();
+        if(key.equals(Lockkey)){
+            char[] pwd = password.toCharArray();  //Calculation
             String temp = "";
             for(char c: pwd) {
                 c += 5;
                 temp = temp + c;
             }
 
-            Intent i = new Intent(LockOne.this, LockTwo.class);
-
-            i.putExtra(LockTwo.TITLE, title);
-            i.putExtra(LockTwo.PASSWORD, temp);
-            i.putExtra(LockTwo.URL, Url);
-            i.putExtra(LockTwo.DESCRIPTION, description);
-
-            startActivity(i);
+            //Send to Database
+            boolean isInserted = myDb.insertLockData(title, temp, description, date, selectedNoteColor);
+            if(isInserted == true){//Successful tost message
+                Toast.makeText(LockOne.this, "Data Inserted Successfully", Toast.LENGTH_LONG).show();
+                startActivity(
+                        new Intent(LockOne.this, PasswordMain.class)
+                );
+            }else{//Unsuccessful tost message
+                Toast.makeText(LockOne.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
+            }
         }else{
             showPasswordIncorrectDialog();
         }
-
-
     }
 
 
@@ -288,17 +381,36 @@ public class LockOne extends AppCompatActivity {
     private void showChangePasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LockOne.this);
         View view = LayoutInflater.from(this).inflate(
-                R.layout.layout_change_password,
-                (ViewGroup) findViewById(R.id.layoutChangePasswordContainer)
+                R.layout.layout_change_password, //layout name
+                (ViewGroup) findViewById(R.id.layoutChangePasswordContainer) //layout id
         );
         builder.setView(view);
         dialogChangePassword = builder.create();
-        if (dialogChangePassword.getWindow() != null) {
+        if (dialogChangePassword.getWindow() != null) { //check null or not
             dialogChangePassword.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
+        //catch ids for variables
+        TextView displaySecurityQuestion = view.findViewById(R.id.displaySecurityQuestion);
+        displaySecurityQuestion.setText(myDb.getSecurityQuestion());//display password from retrieving database
 
+        answerQuestion =  view.findViewById(R.id.answer);
 
-
+        String answer = myDb.getAnswer();
+        //Onclick confirm
+        view.findViewById(R.id.textConfirm).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {//Insert part
+                String answerQ = answerQuestion.getText().toString();
+                if(answer.equals(answerQ)){//Successfully inserted toast
+                    startActivity(
+                            new Intent(LockOne.this, LockReset.class)
+                    );
+                }else{//Unsuccessful toast
+                    Toast.makeText(LockOne.this, "Incorrect Answer "+ answerQ, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        //Cancel button
         view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -307,4 +419,11 @@ public class LockOne extends AppCompatActivity {
         });
         dialogChangePassword.show();
     }
+
+    //Change color
+    private void setPasswordIndicatorColor(){
+        GradientDrawable gradientDrawable = (GradientDrawable) viewPasswordIndicator.getBackground();
+        gradientDrawable.setColor(Color.parseColor(selectedNoteColor));
+    }
 }
+

@@ -7,7 +7,7 @@
     <string name="list">List</string>
     <string name="sticky_icon">Sticky Notes</string>
     <string name="lock">Password Lock</string>
-    <string name="password_lock">Password Lock</string>
+    <string name="password_lock">Lock Password</string>
     <string name="search_password">Search Password</string>
     <string name="password_title">Password Title</string>
     <string name="password">Password</string>
@@ -17,7 +17,7 @@
     <string name="encrypt">Encrypt</string>
     <string name="pick_color">Pick Color</string>
     <string name="add_url">Add URL</string>
-    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password">Forgot Key</string>
     <string name="typed_description">Description</string>
     <string name="decrypt">Decrypt</string>
     <string name="done">Done</string>
@@ -90,6 +90,11 @@
     <string name="search_list">search list Here</string>
     <string name="tv_backhome">Easy sticky Note</string>
     <string name="searchstkinput">search sticky note here</string>
+    <string name="tv_dltstk">Delete Sticky note</string>
+    <string name="stkDeleteNote">Delete</string>
+    <string name="tv_dltallstk">Delete All</string>
+    <string name="tv_stktext">Are you sure delete all sticky notes?</string>
+    <string name="search_notes">search list</string>
 
 
 </resources>

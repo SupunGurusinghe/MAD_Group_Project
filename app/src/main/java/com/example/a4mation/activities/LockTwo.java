@@ -4,9 +4,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a4mation.R;
 
@@ -27,35 +30,39 @@ import java.util.Date;
 import java.util.Locale;
 
 public class LockTwo extends AppCompatActivity {
+    // Database Object Declaration
+    DbHandler myDb;
+
+
 
     private Button decryptButton;
     private EditText keyEdit;
-    private TextView titleEdit;
-    private TextView passwordEdit;
-    private TextView descriptionEdit;
     private TextView inputURL;
+    TextView InputPasswordTitle2;
+    TextView inputPassword2;
+    TextView textDateTime2;
+    TextView inputDescription2;
+    private EditText answerQuestion;
 
     private LinearLayout layoutForgotPassword;
-
-    private TextView title, password, url, description;
-
-    public static final String TITLE = "Title";
-    public static final String PASSWORD = "Password";
-    public static final String DESCRIPTION = "Description";
-    public static final String URL = "WWW.GOOGLE.COM";
 
     private String passwordTitle, passwordPassword, passwordUrl, passwordDescription, passwordKey;
     private String title2, password2, description2, Url2, key2;
 
+
+    //dialog popups
     private AlertDialog dialogIncorrectPassword;
     private AlertDialog dialogChangePassword;
+
+    //color changing
+    private String selectedNoteColor;
+    private View viewPasswordIndicator;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_two);
-
 
         // Define ActionBar object
         ActionBar actionBar;
@@ -82,46 +89,61 @@ public class LockTwo extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatusBar));
         }
 
+        //Database creation
+        myDb = new DbHandler(this);
 
-        title = findViewById(R.id.InputPasswordTitle);
-        password = findViewById(R.id.inputPassword);
-        url = findViewById(R.id.textWebUrl);
-        description = findViewById(R.id.inputDescription);
-
-        Intent i = getIntent();
-        passwordTitle = i.getStringExtra(TITLE);
-        passwordPassword = i.getStringExtra(PASSWORD);
-        passwordUrl = i.getStringExtra(URL);
-        passwordDescription = i.getStringExtra(DESCRIPTION);
-
-        title.setText(passwordTitle);
-        password.setText(passwordPassword);
-        url.setText(passwordUrl);
-        description.setText(passwordDescription);
-
-
-
-        titleEdit = (TextView) findViewById(R.id.InputPasswordTitle);
-        passwordEdit = (TextView)findViewById(R.id.inputPassword);
-        descriptionEdit = (TextView) findViewById(R.id.inputDescription);
+        InputPasswordTitle2 = findViewById(R.id.InputPasswordTitle2);
+        inputPassword2 = findViewById(R.id.inputPassword2);
+        textDateTime2 = findViewById(R.id.textDateTime2);
+        inputDescription2 = findViewById(R.id.inputDescription2);
         keyEdit = (EditText) findViewById(R.id.key);
-        inputURL = (TextView) findViewById(R.id.textWebUrl);
+        viewPasswordIndicator = findViewById(R.id.viewPasswordIndicator);
 
-        decryptButton = findViewById(R.id.decryptButton);
+        //call intent
+        getIntentData();
+
+
+        //Decrypt password
+        decryptButton = (Button) findViewById(R.id.decryptButton);
         decryptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendData();
+                String keyLock = myDb.getSecurityKey();
+                if(keyLock.equals(keyEdit.getText().toString())){
+                    String id = getIntent().getStringExtra("id");
+                    String title = getIntent().getStringExtra("title");
+                    String datetime = getIntent().getStringExtra("datetime");
+                    String color = getIntent().getStringExtra("color");
+                    String tempPassword = myDb.getPassword(id);
+                    String tempDescription = myDb.getDescription(id);
+
+
+                    Intent intent = new Intent(LockTwo.this, LockThree.class);
+                    intent.putExtra("id2", id);
+                    intent.putExtra("title2", title);
+                    intent.putExtra("datetime2", datetime);
+                    intent.putExtra("password2", tempPassword);
+                    intent.putExtra("description2", tempDescription);
+                    intent.putExtra("color2", color);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(LockTwo.this, "Key is incorrect", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
+
+
+
+        inputURL = (TextView) findViewById(R.id.textWebUrl);
 
         ImageView imageSave = findViewById(R.id.imageSave);
         imageSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(
-                        new Intent(LockTwo.this, LockMain.class)
+                        new Intent(LockTwo.this, PasswordMain.class)
                 );
             }
         });
@@ -136,14 +158,6 @@ public class LockTwo extends AppCompatActivity {
 
 
 
-        TextView textDateTime = findViewById(R.id.textDateTime);
-
-        textDateTime.setText(
-                new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
-                        .format(new Date())
-
-        );
-
         //change password
         layoutForgotPassword = findViewById(R.id.layoutForgotPassword);
         layoutForgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -152,36 +166,7 @@ public class LockTwo extends AppCompatActivity {
                 showChangePasswordDialog();
             }
         });
-    }
 
-    public void sendData(){
-        title2 = titleEdit.getText().toString().trim();
-        password2 = passwordEdit.getText().toString().trim();
-        Url2 = inputURL.getText().toString().trim();
-        description2 = descriptionEdit.getText().toString().trim();
-        key2 = keyEdit.getText().toString().trim();
-
-        if(key2.equals(LockOne.defaultKey)){
-
-            char[] pwd = password2.toCharArray();
-
-            String temp = "";
-            for(char c: pwd) {
-                c -= 5;
-                temp = temp + c;
-            }
-
-            Intent i = new Intent(LockTwo.this, LockThree.class);
-
-            i.putExtra(LockThree.TITLE2, title2);
-            i.putExtra(LockThree.PASSWORD2, temp);
-            i.putExtra(LockThree.URL2, Url2);
-            i.putExtra(LockThree.DESCRIPTION2, description2);
-
-            startActivity(i);
-        }else{
-            showPasswordIncorrectDialog();
-        }
 
 
     }
@@ -226,7 +211,25 @@ public class LockTwo extends AppCompatActivity {
             dialogChangePassword.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
 
+        TextView displaySecurityQuestion = view.findViewById(R.id.displaySecurityQuestion);
+        displaySecurityQuestion.setText(myDb.getSecurityQuestion());
 
+        answerQuestion = view.findViewById(R.id.answer);
+
+        String answer = myDb.getAnswer();
+        view.findViewById(R.id.textConfirm).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String answerQ = answerQuestion.getText().toString();
+                if(answer.equals(answerQ)){
+                    startActivity(
+                            new Intent(LockTwo.this, LockReset.class)
+                    );
+                }else{
+                    Toast.makeText(LockTwo.this, "Incorrect Answer "+ answerQ, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,5 +238,57 @@ public class LockTwo extends AppCompatActivity {
             }
         });
         dialogChangePassword.show();
+    }
+
+
+
+
+    //data retrieve
+    void getIntentData(){
+        if(getIntent().hasExtra("id")){
+            //get intent values
+            String id = getIntent().getStringExtra("id");
+            String title = getIntent().getStringExtra("title");
+            String datetime = getIntent().getStringExtra("datetime");
+            String color = getIntent().getStringExtra("color");
+
+            //call two functions
+            String tempPassword = myDb.getPassword(id);
+            String tempDescription = myDb.getDescription(id);
+
+
+            //selecting condition
+            if(color.equals("#333333")){
+                selectedNoteColor = "#333333";
+                setPasswordIndicatorColor();
+            }else if(color.equals("#FDBE3B")){
+                selectedNoteColor = "#FDBE3B";
+                setPasswordIndicatorColor();
+            }else if(color.equals("#FF4842")){
+                selectedNoteColor = "#FF4842";
+                setPasswordIndicatorColor();
+            }else if(color.equals("#3A52Fc")){
+                selectedNoteColor = "#3A52Fc";
+                setPasswordIndicatorColor();
+            }else if(color.equals("#000000")){
+                selectedNoteColor = "#000000";
+                setPasswordIndicatorColor();
+            }
+
+
+            //set values for views
+            InputPasswordTitle2.setText(title);
+            textDateTime2.setText(datetime);
+            inputPassword2.setText(tempPassword);
+            inputDescription2.setText(tempDescription);
+        }else{
+            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //Change color of password indicator
+    private void setPasswordIndicatorColor(){
+        GradientDrawable gradientDrawable = (GradientDrawable) viewPasswordIndicator.getBackground();
+        gradientDrawable.setColor(Color.parseColor(selectedNoteColor));
     }
 }

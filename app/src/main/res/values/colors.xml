@@ -35,6 +35,8 @@
     <color name="colorbox2">#ED9121</color>
     <color name="colorbox3">#01796F</color>
     <color name="colorbox4">#D21F3C</color>
+    <color name="colorNew">#669900</color>
+    <color name="colorTo">#2196F3</color>
 
 
     <color name="yellow">#ffbb33</color>
@@ -43,9 +45,26 @@
     <color name="search">#333333</color>
     <color name="hintCol">#7b7b7b</color>
     <color name="colorStatusBar">#DC143C</color>
+    <color name="colorBar">#FF4500</color>
+    <color name="save_button">#FF5C58</color>
+    <color name="Update_Button">#FF5C58</color>
+    <color name="colorAccent1">#FDBE3B</color>
+    <color name="AddButton1">#FF6347</color>
+    <color name="cardColor">#423F3E</color>
+
+    <color name="AddButton">#E48900</color>
+    <color name="listItemStatusBar">#FF6347</color>
+    <color name="colorQuentity">#7B7B7B</color>
+    <color name="colorCardColor">#423F3E</color>
+    <color name="delete_Button">#FF5C58</color>
+    <color name="numColor">#CDD0CB</color>
 
 
     <color name="colorQuickActionsBackground">#2F2D2E</color>
     <color name="colorNoteSubtitle">#CECECE</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
 
 </resources>

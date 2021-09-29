@@ -24,7 +24,7 @@
             android:animateLayoutChanges="true">
 
     <TextView
-        android:id="@+id/tv_scount"
+        android:id="@+id/tv_sscount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_sen" />
 
     <TextView
-        android:id="@+id/tv_wcount"
+        android:id="@+id/tv_wwcount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
@@ -145,7 +145,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/eet_tl"
                 app:layout_constraintEnd_toStartOf="@+id/eet_tl"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_wcount" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_wwcount" />
 
             <ImageView
                 android:id="@+id/eimgStk"
@@ -448,7 +448,7 @@
         </ImageView>
 
         <ImageView
-            android:id="@+id/img_ok"
+            android:id="@+id/img_o"
             android:layout_width="38dp"
             android:layout_height="37dp"
             android:background="@drawable/stkbackground_green"
