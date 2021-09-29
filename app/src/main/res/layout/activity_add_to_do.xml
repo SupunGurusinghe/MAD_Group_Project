@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.421" />
+        app:layout_constraintVertical_bias="0.396" />
 
     <Button
         android:id="@+id/buttonEdit"
@@ -41,7 +41,7 @@
         android:id="@+id/imageView2"
         android:layout_width="177dp"
         android:layout_height="163dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -69,6 +69,7 @@
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
                 android:text="Title :"
+                android:textColor="#FFFFFF"
                 android:textColor="@color/colorNoteSubtitle"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -80,6 +81,7 @@
                 android:ems="10"
                 android:gravity="center_vertical"
                 android:inputType="textPersonName"
+                android:textColor="#F6F5F5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="SpeakableTextPresentCheck"
@@ -100,6 +102,7 @@
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
                 android:text="Description : "
+                android:textColor="#FFFFFF"
                 android:textColor="@color/colorNoteSubtitle"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -111,6 +114,7 @@
                 android:ems="10"
                 android:gravity="center_vertical"
                 android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="SpeakableTextPresentCheck"
