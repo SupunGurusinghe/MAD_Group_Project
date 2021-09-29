@@ -41,6 +41,9 @@
             android:name=".activities.AddToDo"
             android:exported="true" />
         <activity
+            android:name=".activities.EditTodo"
+            android:exported="true" />
+        <activity
             android:name=".activities.TodoHome"
             android:exported="true" />
         <activity

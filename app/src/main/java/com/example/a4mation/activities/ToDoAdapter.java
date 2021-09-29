@@ -46,7 +46,7 @@ public class ToDoAdapter extends ArrayAdapter<ToDo> {
         ToDo toDo = todos.get(position);
         title.setText(toDo.getTitle());
         description.setText(toDo.getDescription());
-        imageView.setVisibility(row.VISIBLE);
+        imageView.setVisibility(row.INVISIBLE);
 
         if(toDo.getFinished() > 0){
             imageView.setVisibility(View.VISIBLE);
