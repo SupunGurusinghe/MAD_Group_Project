@@ -18,8 +18,7 @@
             android:exported="true" />
         <activity
             android:name=".activities.ListView"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activities.CreateNewList"
             android:label="List"
@@ -31,8 +30,7 @@
         <activity
             android:name=".activities.ViewItemLists"
             android:label="Add Items"
-            android:parentActivityName=".activities.CreateNewList">
-        </activity>
+            android:parentActivityName=".activities.CreateNewList"/>
         <activity
             android:name=".activities.Add_Items"
             android:label="Add Items"

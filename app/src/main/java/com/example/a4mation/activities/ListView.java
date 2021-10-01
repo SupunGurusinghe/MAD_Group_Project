@@ -1,16 +1,22 @@
 package com.example.a4mation.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,7 +33,7 @@ public class ListView extends AppCompatActivity {
     ImageView imageAddNoteMain;
 
     DbHandler myDB;
-    ArrayList<String> list_id, list_title, list_subtitle;
+    ArrayList<String> list_id, list_title, list_subtitle, list_date;
     MyCustomAdapter customAdapter;
 
 
@@ -51,6 +57,7 @@ public class ListView extends AppCompatActivity {
         list_id = new ArrayList<>();
         list_title = new ArrayList<>();
         list_subtitle = new ArrayList<>();
+        list_date = new ArrayList<>();
 
 
 
@@ -89,7 +96,7 @@ public class ListView extends AppCompatActivity {
 
         storeListData();
 
-        customAdapter = new MyCustomAdapter(ListView.this, list_id, list_title, list_subtitle);
+        customAdapter = new MyCustomAdapter(ListView.this, list_id, list_title, list_subtitle, list_date);
         notesRecyclerView.setAdapter(customAdapter);
         notesRecyclerView.setLayoutManager(new LinearLayoutManager(ListView.this));
 
@@ -104,8 +111,54 @@ public class ListView extends AppCompatActivity {
                 list_id.add(cursor.getString(0));
                 list_title.add(cursor.getString(1));
                 list_subtitle.add(cursor.getString(2));
+                list_date.add(cursor.getString(3));
             }
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.delete_list_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.delete_all_list){
+
+            confirmDialog();
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete All ?");
+        builder.setMessage("Are you sure you want to delete all data ?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                DbHandler myDB = new DbHandler(ListView.this);
+                myDB.deleteAllListData();
+                // Refresh Activity
+                Intent intent = new Intent(ListView.this,ListView.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.create().show();
+
     }
 
 }

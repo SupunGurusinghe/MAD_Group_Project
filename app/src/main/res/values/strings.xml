@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">4Mation</string>
+    <string name="app_name">Note Vibes</string>
     <string name="lets_go">Let\'s Go</string>
     <string name="note_vibes">Note Vibes</string>
     <string name="slogan">N O T E   Y O U R S E L F</string>
@@ -86,7 +86,7 @@
 
     <string name="note_title">List Title</string>
     <string name="note_subtitle">List Subtitle</string>
-    <string name="my_lists">my lists</string>
+    <string name="my_lists">My Lists</string>
     <string name="search_list">search list Here</string>
     <string name="tv_backhome">Easy sticky Note</string>
     <string name="searchstkinput">search sticky note here</string>
@@ -95,6 +95,7 @@
     <string name="tv_dltallstk">Delete All</string>
     <string name="tv_stktext">Are you sure delete all sticky notes?</string>
     <string name="search_notes">search list</string>
+    <string name="Options">Options</string>
 
 
 </resources>

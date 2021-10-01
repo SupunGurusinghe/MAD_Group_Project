@@ -16,14 +16,15 @@ import java.util.ArrayList;
 public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MyViewHolder> {
 
        private Context context;
-       private ArrayList list_id, list_title,list_subtitle;
+       private ArrayList list_id, list_title,list_subtitle,list_date;
 
-       MyCustomAdapter(Context context, ArrayList list_id, ArrayList list_title, ArrayList list_subtitle){
+       MyCustomAdapter(Context context, ArrayList list_id, ArrayList list_title, ArrayList list_subtitle, ArrayList list_date){
 
            this.context = context;
            this.list_id = list_id;
            this.list_title = list_title;
            this.list_subtitle = list_subtitle;
+           this.list_date = list_date;
        }
 
 
@@ -40,6 +41,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
            holder.list_title_txt.setText(String.valueOf(list_title.get(position)));
            holder.list_subtitle_txt.setText(String.valueOf(list_subtitle.get(position)));
+           holder.list_date_txt.setText(String.valueOf(list_date.get(position)));
 
     }
 
@@ -50,13 +52,14 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-           TextView list_title_txt, list_subtitle_txt;
+           TextView list_title_txt, list_subtitle_txt, list_date_txt;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             list_title_txt = itemView.findViewById(R.id.list_title_txt);
             list_subtitle_txt = itemView.findViewById(R.id.list_subtitle_txt);
+            list_date_txt = itemView.findViewById(R.id.list_date_txt);
 
         }
     }

@@ -14,19 +14,35 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.a4mation.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class CreateNewList extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD_NOTE = 1;
-    EditText inputNoteTitle,inputNoteSubtitle;
+    EditText inputNoteTitle, inputNoteSubtitle, textDateTime1;
     ImageView imageSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_list);
+        textDateTime1 = findViewById(R.id.textDateTime1);
+
+
+        //update current date and time
+        textDateTime1.setText(
+                new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
+                        .format(new Date())
+
+        );
+
 
         inputNoteTitle = findViewById(R.id.inputNoteTitle);
         inputNoteSubtitle = findViewById(R.id.inputNoteSubtitle);
@@ -34,15 +50,16 @@ public class CreateNewList extends AppCompatActivity {
         imageSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbHandler myDB = new DbHandler(CreateNewList.this);
-                myDB.createList(inputNoteTitle.getText().toString().trim(),inputNoteSubtitle.getText().toString().trim());
+
+                insertDate();
             }
+
         });
+
 
         // Define ActionBar object
         ActionBar actionBar;
         actionBar = getSupportActionBar();
-
 
 
 // Define ColorDrawable object and parse color
@@ -52,16 +69,13 @@ public class CreateNewList extends AppCompatActivity {
                 = new ColorDrawable(Color.parseColor("#FF6347"));
 
 
-
 // Set BackgroundDrawable
         actionBar.setBackgroundDrawable(colorDrawable);
-
 
 
 // Change Toolbar text
         getSupportActionBar().setTitle("List");
 // getSupportActionBar().setSubtitle("Main");
-
 
 
 // Change the color of status bar
@@ -86,12 +100,31 @@ public class CreateNewList extends AppCompatActivity {
         add_items.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(getApplicationContext(),ViewItemLists.class),
+                startActivityForResult(new Intent(getApplicationContext(), ViewItemLists.class),
                         REQUEST_CODE_ADD_NOTE);
             }
         });
 
 
+    }
+
+
+    public void insertDate() {
+        DbHandler myDB = new DbHandler(CreateNewList.this);
+        boolean isInserted = myDB.createList(inputNoteTitle.getText().toString().trim(),
+                inputNoteSubtitle.getText().toString().trim(),
+                textDateTime1.getText().toString().trim());
+
+
+        if (isInserted == true) {//Successful tost message
+            Toast.makeText(CreateNewList.this, "Data Inserted Successfully", Toast.LENGTH_LONG).show();
+            startActivity(
+                    new Intent(CreateNewList.this, ListView.class)
+            );
+        } else {//Unsuccessful tost message
+            Toast.makeText(CreateNewList.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
+
+        }
 
     }
 }
