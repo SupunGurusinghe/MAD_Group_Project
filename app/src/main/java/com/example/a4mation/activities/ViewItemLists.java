@@ -140,10 +140,12 @@ public class ViewItemLists extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 DbHandler myDB = new DbHandler(ViewItemLists.this);
                 myDB.deleteAllData();
+
                 //Refresh Activity
                 Intent intent = new Intent(ViewItemLists.this,ViewItemLists.class);
                 startActivity(intent);
                 finish();
+
             }
         });
 

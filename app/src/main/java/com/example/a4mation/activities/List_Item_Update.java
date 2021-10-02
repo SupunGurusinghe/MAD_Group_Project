@@ -114,6 +114,7 @@ public class List_Item_Update extends AppCompatActivity {
         }
     }
 
+    // Delete Items
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete " + item + " ?");
@@ -125,11 +126,8 @@ public class List_Item_Update extends AppCompatActivity {
                 DbHandler myDB = new DbHandler(List_Item_Update.this);
                 myDB.deleteOneRow(id);
                 //finish();
-
             }
         });
-
-
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

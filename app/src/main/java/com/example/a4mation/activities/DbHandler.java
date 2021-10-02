@@ -45,6 +45,7 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String COLUMN_lIST_ID = "id";
     private static final String COLUMN_LIST_TITLE_NAME = "title";
     private static final String COLUMN_lIST_SUB_NAME = "subtitle";
+    private static final String COLUMN_LIST_DATE = "date";
 
     //Lock_Table columns
     public static final String COL_1 = "ID";
@@ -108,7 +109,7 @@ public class DbHandler extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_NAME5 +
                         " (" + COLUMN_lIST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_LIST_TITLE_NAME + " TEXT, " +
-                        COLUMN_lIST_SUB_NAME + " TEXT);";
+                        COLUMN_lIST_SUB_NAME + " TEXT," + COLUMN_LIST_DATE + " TEXT);";
 
         db.execSQL(query3);
 
@@ -483,11 +484,6 @@ public class DbHandler extends SQLiteOpenHelper {
 
 
 
-
-
-
-
-
     // Adding list Items
     void addItems(String item_name, int quantity){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -502,7 +498,6 @@ public class DbHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Added Successfully", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     Cursor readAllData(){
         String query = "SELECT * FROM " + TABLE_NAME4;
@@ -547,20 +542,23 @@ public class DbHandler extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_NAME4);
     }
 
-    // Create List
-    void createList(String title, String subtitle){
+    // Adding main List
+    public boolean createList(String title, String subtitle, String date){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put (COLUMN_LIST_TITLE_NAME, title);
         cv.put (COLUMN_lIST_SUB_NAME, subtitle);
+        cv.put (COLUMN_LIST_DATE, date);
 
         long result = db.insert(TABLE_NAME5, null,cv);
         if(result == -1){
-            Toast.makeText(context,"Failed", Toast.LENGTH_SHORT).show();
+           return false;
         }else{
-            Toast.makeText(context,"Added Successfully", Toast.LENGTH_SHORT).show();
+            return true;
         }
+
+
     }
 
     Cursor readData(){
@@ -572,6 +570,12 @@ public class DbHandler extends SQLiteOpenHelper {
             cursor = db.rawQuery(query3, null);
         }
         return cursor;
+    }
+
+    // Delete All lists (ListView)
+    void deleteAllListData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME5);
     }
 
 }
